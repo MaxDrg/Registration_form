@@ -1,0 +1,20 @@
+from django.db import models
+
+class Form(models.Model):
+    academic_title      = models.CharField("Academic title", max_length=255)
+    given_name          = models.CharField("Given name", max_length=255)
+    family_name         = models.CharField("Family name", max_length=255)
+    gender              = models.CharField("Gender", max_length=255)
+    email               = models.CharField("Email", max_length=255)
+    telephone           = models.CharField("Telephone", max_length=255)
+    academic_status     = models.CharField("Academic status", max_length=255)
+    country_origin      = models.CharField("Country origin", max_length=255)
+    current_location    = models.CharField("Current location", max_length=255)
+    profession          = models.CharField("Profession", max_length=255)
+    university          = models.CharField("University", max_length=255)
+    type_participation  = models.CharField("Type participation", max_length=255)
+    presentation_title  = models.CharField("Presentation title", max_length=255)
+    abstract            = models.TextField("Abstract")
+    short_cv            = models.TextField("Short CV")
+    presentation_upload = models.FileField("Telegram's ID")
+    portrait            = models.FileField("Portrait")

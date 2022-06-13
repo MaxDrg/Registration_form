@@ -1,0 +1,1295 @@
+<html lang="en-GB" dir="ltr" class="g-offcanvas-css3">
+
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <base href="https://chance-for-science.eu/backup/index.php/register-for-conference">
+    <meta name="generator" content="Joomla! - Open Source Content Management">
+    <title>Register for Conference</title>
+    <link href="/backup/templates/g5_helium/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="https://chance-for-science.eu/backup/plugins/editors/dropeditor/dropeditor.css" rel="stylesheet">
+    <link href="https://chance-for-science.eu/backup/media/dropeditor/customstyles.css" rel="stylesheet">
+    <link href="https://chance-for-science.eu/backup/media/dropeditor/titlestyles.css" rel="stylesheet">
+    <link href="/backup/media/com_visforms/css/bootstrapform.css?159f1394001f9ba6879ef9aa43905dac" rel="stylesheet">
+    <link href="/backup/media/com_visforms/css/visforms.min.css?159f1394001f9ba6879ef9aa43905dac" rel="stylesheet">
+    <link href="/backup/media/gantry5/engines/nucleus/css-compiled/nucleus.css?629f2729" rel="stylesheet">
+    <link href="/backup/templates/g5_helium/custom/css-compiled/helium_12.css?629f2bb3" rel="stylesheet">
+    <link href="/backup/media/gantry5/assets/css/bootstrap-gantry.css?629f26ff" rel="stylesheet">
+    <link href="/backup/media/gantry5/engines/nucleus/css-compiled/joomla.css?629f2729" rel="stylesheet">
+    <link href="/backup/media/jui/css/icomoon.css?629f26df" rel="stylesheet">
+    <link href="/backup/media/gantry5/assets/css/font-awesome.min.css?629f26ff" rel="stylesheet">
+    <link href="/backup/templates/g5_helium/custom/css-compiled/helium-joomla_12.css?629f2bb4" rel="stylesheet">
+    <link href="/backup/templates/g5_helium/custom/css-compiled/custom_12.css?629f2bb4" rel="stylesheet">
+    <style>
+        form#visform4 div.control-group.required span.control-label:before {
+            content: "*";
+            color: red;
+            display: inline-block;
+            padding-right: 0;
+        }
+
+        form#visform4 div.control-group.required .control-label:before {
+            content: "*";
+            color: red;
+            display: inline-block;
+            padding-right: 10px;
+        }
+
+        form#visform4 .vflocationsubform {
+            display: block;
+        }
+
+        form#visform4 .vflocationsubform .locationinput,
+        form#visform4 .vflocationsubform .getmylocationbutton {
+            display: inline-block;
+            margin-bottom: 0;
+            vertical-align: middle;
+        }
+    </style>
+    <script type="text/javascript" async="" src="https://stats.g.doubleclick.net/dc.js"></script>
+    <script src="/backup/media/jui/js/jquery.min.js?159f1394001f9ba6879ef9aa43905dac"></script>
+    <script src="/backup/media/jui/js/jquery-noconflict.js?159f1394001f9ba6879ef9aa43905dac"></script>
+    <script src="/backup/media/jui/js/jquery-migrate.min.js?159f1394001f9ba6879ef9aa43905dac"></script>
+    <script src="/backup/media/jui/js/bootstrap.min.js?159f1394001f9ba6879ef9aa43905dac"></script>
+    <script src="/backup/media/com_visforms/js/jquery.validate.min.js?159f1394001f9ba6879ef9aa43905dac"></script>
+    <script src="/backup/media/com_visforms/js/visforms.js?159f1394001f9ba6879ef9aa43905dac"></script>
+    <script>
+        jQuery(document).ready(function () {
+            jQuery.extend(jQuery.validator.messages, {
+                required: "This field is required.",
+                remote: "Please fix this field.",
+                email: "Please enter a valid email: <span>E.g. yourname&#64;domain.com</span>",
+                url: "Please enter a valid url: <span>E.g. http://www.domain.com</span>",
+                date: "Please enter a valid date.",
+                dateISO: "Please enter a valid date (ISO).",
+                number: "Please enter a valid number.",
+                digits: "Please enter a digit.",
+                creditcard: "Please enter a valid credit card number.",
+                equalTo: "Please repeat the value.",
+                maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
+                minlength: jQuery.validator.format("Please enter at least {0} characters."),
+                rangelength: jQuery.validator.format("Please enter {0} to {1} character."),
+                range: jQuery.validator.format("Please enter a number between {0} and {1}."),
+                max: jQuery.validator.format("Please enter a number lower or equal {0}."),
+                min: jQuery.validator.format("Please enter a number greater or equal {0}."),
+                customvalidation: "Invalid Input",
+                ispair: "Latitude and longigute must be valid geocoordinates in decimal format and must be entered as pair."
+            });
+        });
+        jQuery(document).ready(function () {
+            jQuery.validator.addMethod("dateDMY", function (value, element) {
+                var check = false;
+                var re = /^(0[1-9]|[12][0-9]|3[01])[\.](0[1-9]|1[012])[\.]\d{4}$/;
+                if (re.test(value)) {
+                    var adata = value.split(".");
+                    var day = parseInt(adata[0], 10);
+                    var month = parseInt(adata[1], 10);
+                    var year = parseInt(adata[2], 10);
+                    if (day == 31 && (month == 4 || month == 6 || month == 9 || month == 11)) {
+                        check = false; // 31st of a month with 30 days
+                    } else if (day >= 30 && month == 2) {
+                        check = false; // February 30th or 31st
+                    } else if (month == 2 && day == 29 && !(year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))) {
+                        check = false; // February 29th outside a leap year
+                    } else {
+                        check = true; // Valid date
+                    }
+                }
+                //the calender does not allow to clear values if it is required (js). So the required option in this validation is just a workaround fallback
+                if (value == "0000-00-00 00:00:00" && !jQuery(element).prop("required")) {
+                    check = true;
+                }
+                return this.optional(element) || check;
+            });
+            jQuery.validator.addMethod("dateMDY", function (value, element) {
+                var check = false;
+                var re = /^(0[1-9]|1[012])[\/](0[1-9]|[12][0-9]|3[01])[\/]\d{4}$/;
+                if (re.test(value)) {
+                    var adata = value.split("/");
+                    var month = parseInt(adata[0], 10);
+                    var day = parseInt(adata[1], 10);
+                    var year = parseInt(adata[2], 10);
+                    if (day == 31 && (month == 4 || month == 6 || month == 9 || month == 11)) {
+                        check = false; // 31st of a month with 30 days
+                    } else if (day >= 30 && month == 2) {
+                        check = false; // February 30th or 31st
+                    } else if (month == 2 && day == 29 && !(year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))) {
+                        check = false; // February 29th outside a leap year
+                    } else {
+                        check = true; // Valid date
+                    }
+                }
+                //the calender does not allow to clear values if it is required (js). So the required option in this validation is just a workaround fallback
+                if (value == "0000-00-00 00:00:00" && !jQuery(element).prop("required")) {
+                    check = true;
+                }
+                return this.optional(element) || check;
+            });
+            jQuery.validator.addMethod("dateYMD", function (value, element) {
+                var check = false;
+                var re = /^\d{4}[\-](0[1-9]|1[012])[\-](0[1-9]|[12][0-9]|3[01])$/;
+                if (re.test(value)) {
+                    var adata = value.split("-");
+                    var year = parseInt(adata[0], 10);
+                    var month = parseInt(adata[1], 10);
+                    var day = parseInt(adata[2], 10);
+                    if (day == 31 && (month == 4 || month == 6 || month == 9 || month == 11)) {
+                        check = false; // 31st of a month with 30 days
+                    } else if (day >= 30 && month == 2) {
+                        check = false; // February 30th or 31st
+                    } else if (month == 2 && day == 29 && !(year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))) {
+                        check = false; // February 29th outside a leap year
+                    } else {
+                        check = true; // Valid date
+                    }
+                }
+                //the calender does not allow to clear values if it is required (js). So the required option in this validation is just a workaround fallback
+                if (value == "0000-00-00 00:00:00" && !jQuery(element).prop("required")) {
+                    check = true;
+                }
+                return this.optional(element) || check;
+            });
+            jQuery.validator.addMethod("filesize", function (value, element, maxsize) {
+                var check = false;
+                if ((maxsize === 0) || ((!(element.files.length == 0)) && (element.files[0].size < maxsize))) {
+                    check = true;
+                }
+                return this.optional(element) || check;
+            });
+            jQuery.validator.addMethod("fileextension", function (value, element, allowedextension) {
+                var check = false;
+                allowedextension = allowedextension.replace(/\s/g, "");
+                allowedextension = allowedextension.split(",");
+                var fileext = jQuery(element).val().split(".").pop().toLowerCase();
+                if (jQuery.inArray(fileext, allowedextension) > -1) {
+                    check = true;
+                }
+                return this.optional(element) || check;
+            });
+            jQuery.validator.addMethod("customvalidation", function (value, element, re) {
+                return this.optional(element) || re.test(value);
+            });
+            jQuery.validator.addMethod("ispair", function (value, element, id) {
+                var latval = document.getElementById(id + "_lat").value;
+                var lngval = document.getElementById(id + "_lng").value;
+                //false if on field is empty and the other not
+                var check = ((latval === "" && lngval === "") || (latval !== "" && lngval !== ""));
+                var relatval = /^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/;
+                var relngval = /^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/;
+                check = (latval === "" || relatval.test(latval)) && check;
+                check = (lngval === "" || relngval.test(lngval)) && check;
+                return check;
+            });
+            jQuery.validator.addMethod("mindate", function (value, element, options) {
+                var check = false;
+                var minDate = "";
+                if (value) {
+                    if (options.fromField) {
+                        var fieldId = options.value;
+                        var field = document.getElementById(fieldId);
+                        if (!field) {
+                            return true;
+                        }
+                        if (field.disabled) {
+                            return true;
+                        }
+                        minDate = field.value;
+                        if (!minDate) {
+                            return true;
+                        }
+                    } else {
+                        minDate = options.value;
+                    }
+                    var format, i = 0, fmt = {}, minDateFormat, j = 0, minDateFmt = {}, day;
+                    format = (value.indexOf(".") > -1) ? "dd.mm.yyyy" : ((value.indexOf("/") > -1) ? "mm/dd/yyyy" : "yyyy-mm-dd");
+                    format.replace(/(yyyy|dd|mm)/g, function (part) { fmt[part] = i++; });
+                    minDateFormat = (minDate.indexOf(".") > -1) ? "dd.mm.yyyy" : ((minDate.indexOf("/") > -1) ? "mm/dd/yyyy" : "yyyy-mm-dd");
+                    minDateFormat.replace(/(yyyy|dd|mm)/g, function (part) { minDateFmt[part] = j++; });
+                    var minDateParts = minDate.match(/(\d+)/g);
+                    var valueParts = value.match(/(\d+)/g);
+                    minDate = new Date(minDateParts[minDateFmt["yyyy"]], minDateParts[minDateFmt["mm"]] - 1, minDateParts[minDateFmt["dd"]], 0, 0, 0, 0);
+                    if (options.shift) {
+                        var shift = options.shift;
+                        day = minDate.getDate();
+                        day = day + parseInt(shift);
+                        minDate.setDate(day);
+                    }
+                    value = new Date(valueParts[fmt["yyyy"]], valueParts[fmt["mm"]] - 1, valueParts[fmt["dd"]], 0, 0, 0, 0);
+                    check = value >= minDate;
+                }
+                return this.optional(element) || check;
+            }, function (options, element) {
+                //validation message
+                if (options.fromField) {
+                    var minDate = "";
+                    var fieldId = options.value;
+                    var field = document.getElementById(fieldId);
+                    if (field) {
+                        minDate = field.value;
+                    }
+                } else {
+                    minDate = options.value;
+                }
+                var format, minDateFormat, j = 0, minDateFmt = {}, day, month, year, valDate;
+                minDateFormat = (minDate.indexOf(".") > -1) ? "dd.mm.yyyy" : ((minDate.indexOf("/") > -1) ? "mm/dd/yyyy" : "yyyy-mm-dd");
+                minDateFormat.replace(/(yyyy|dd|mm)/g, function (part) { minDateFmt[part] = j++; });
+                var minDateParts = minDate.match(/(\d+)/g);
+                minDate = new Date(minDateParts[minDateFmt["yyyy"]], minDateParts[minDateFmt["mm"]] - 1, minDateParts[minDateFmt["dd"]], 0, 0, 0, 0);
+                if (options.shift) {
+                    var shift = options.shift;
+                    day = minDate.getDate();
+                    day = day + parseInt(shift);
+                    minDate.setDate(day);
+                }
+                format = options.format;
+                valDate = "";
+                day = minDate.getDate();
+                if (day < 10) {
+                    day = "0" + day;
+                }
+                month = 1 + minDate.getMonth();
+                if (month < 10) {
+                    month = "0" + month;
+                }
+                year = minDate.getFullYear();
+                switch (format) {
+                    case "%Y-%m-%d":
+                        valDate = year + "-" + month + "-" + day;
+                        break;
+                    case "%m/%d/%Y":
+                        valDate = month + "/" + day + "/" + year;
+                        break;
+                    default:
+                        valDate = day + "." + month + "." + year;
+                        break;
+                }
+                return jQuery.validator.format("Please select a date greater or equal to {0}.", valDate);
+            });
+            jQuery.validator.addMethod("maxdate", function (value, element, options) {
+                var check = false;
+                var minDate = "";
+                if (value) {
+                    if (options.fromField) {
+                        var fieldId = options.value;
+                        var field = document.getElementById(fieldId);
+                        if (!field) {
+                            return true;
+                        }
+                        if (field.disabled) {
+                            return true;
+                        }
+                        minDate = field.value;
+                        if (!minDate) {
+                            return true;
+                        }
+                    } else {
+                        minDate = options.value;
+                    }
+                    var format, i = 0, fmt = {}, minDateFormat, j = 0, minDateFmt = {}, day;
+                    format = (value.indexOf(".") > -1) ? "dd.mm.yyyy" : ((value.indexOf("/") > -1) ? "mm/dd/yyyy" : "yyyy-mm-dd");
+                    format.replace(/(yyyy|dd|mm)/g, function (part) { fmt[part] = i++; });
+                    minDateFormat = (minDate.indexOf(".") > -1) ? "dd.mm.yyyy" : ((minDate.indexOf("/") > -1) ? "mm/dd/yyyy" : "yyyy-mm-dd");
+                    minDateFormat.replace(/(yyyy|dd|mm)/g, function (part) { minDateFmt[part] = j++; });
+                    var minDateParts = minDate.match(/(\d+)/g);
+                    var valueParts = value.match(/(\d+)/g);
+                    minDate = new Date(minDateParts[minDateFmt["yyyy"]], minDateParts[minDateFmt["mm"]] - 1, minDateParts[minDateFmt["dd"]], 0, 0, 0, 0);
+                    if (options.shift) {
+                        var shift = options.shift;
+                        day = minDate.getDate();
+                        day = day + parseInt(shift);
+                        minDate.setDate(day);
+                    }
+                    value = new Date(valueParts[fmt["yyyy"]], valueParts[fmt["mm"]] - 1, valueParts[fmt["dd"]], 0, 0, 0, 0);
+                    check = value <= minDate;
+                }
+                return this.optional(element) || check;
+            }, function (options, element) {
+                //validation message
+                if (options.fromField) {
+                    var minDate = "";
+                    var fieldId = options.value;
+                    var field = document.getElementById(fieldId);
+                    if (field) {
+                        minDate = field.value;
+                    }
+                } else {
+                    minDate = options.value;
+                }
+                var format, minDateFormat, j = 0, minDateFmt = {}, day, month, year, valDate;
+                minDateFormat = (minDate.indexOf(".") > -1) ? "dd.mm.yyyy" : ((minDate.indexOf("/") > -1) ? "mm/dd/yyyy" : "yyyy-mm-dd");
+                minDateFormat.replace(/(yyyy|dd|mm)/g, function (part) { minDateFmt[part] = j++; });
+                var minDateParts = minDate.match(/(\d+)/g);
+                minDate = new Date(minDateParts[minDateFmt["yyyy"]], minDateParts[minDateFmt["mm"]] - 1, minDateParts[minDateFmt["dd"]], 0, 0, 0, 0);
+                if (options.shift) {
+                    var shift = options.shift;
+                    day = minDate.getDate();
+                    day = day + parseInt(shift);
+                    minDate.setDate(day);
+                }
+                format = options.format;
+                valDate = "";
+                day = minDate.getDate();
+                if (day < 10) {
+                    day = "0" + day;
+                }
+                month = 1 + minDate.getMonth();
+                if (month < 10) {
+                    month = "0" + month;
+                }
+                year = minDate.getFullYear();
+                switch (format) {
+                    case "%Y-%m-%d":
+                        valDate = year + "-" + month + "-" + day;
+                        break;
+                    case "%m/%d/%Y":
+                        valDate = month + "/" + day + "/" + year;
+                        break;
+                    default:
+                        valDate = day + "." + month + "." + year;
+                        break;
+                }
+                return jQuery.validator.format("Please select a date lower or equal to {0}.", valDate);
+            });
+        });
+        jQuery(document).ready(function () { jQuery("#field48").focus(); });
+    </script>
+
+
+
+    <!-- BEGIN Advanced Google Analytics - http://deconf.com/advanced-google-analytics-joomla/ -->
+
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-224073456-1'], ['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+    <!-- END Advanced Google Analytics -->
+
+
+</head>
+
+<body
+    class="gantry g-helium-style site com_visforms view-visforms no-layout no-task dir-ltr itemid-120 outline-12 g-offcanvas-left g-default g-style-preset4">
+
+
+
+    <div id="g-offcanvas" data-g-offcanvas-swipe="1" data-g-offcanvas-css3="1" style="">
+        <div class="g-grid">
+
+            <div class="g-block hidden size-100">
+                <div id="mobile-menu-5697-particle" class="g-content g-particle">
+                    <div id="g-mobilemenu-container" data-g-menu-breakpoint="48rem"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="g-page-surround">
+        <div class="g-menu-overlay"></div>
+        <div class="g-offcanvas-hide g-offcanvas-toggle" role="navigation" data-offcanvas-toggle=""
+            aria-controls="g-offcanvas" aria-expanded="false"><i class="fa fa-fw fa-bars"></i></div>
+
+
+        <section id="g-navigation">
+            <div class="g-container">
+                <div class="g-grid">
+
+                    <div class="g-block size-100">
+                        <div class="g-system-messages">
+                            <div id="system-message-container">
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="g-grid">
+
+                    <div class="g-block size-25">
+                        <div id="logo-9608-particle" class="g-content g-particle"> <a href="/backup" target="_self"
+                                title="" aria-label="" rel="home" class="g-logo g-logo-helium">
+                                <img src="/backup/images/Logo_rgb.png?629f2535" alt="">
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <div class="g-block size-75">
+                        <div id="menu-6409-particle" class="g-content g-particle">
+                            <nav class="g-main-nav" data-g-mobile-target="" data-g-hover-expand="true">
+                                <ul class="g-toplevel">
+
+
+
+
+
+
+                                    <li class="g-menu-item g-menu-item-type-component g-menu-item-101 g-standard  ">
+                                        <a class="g-menu-item-container" href="/backup/index.php">
+                                            <span class="g-menu-item-content">
+                                                <span class="g-menu-item-title">Home</span>
+
+                                            </span>
+                                        </a>
+                                    </li>
+
+
+
+
+
+
+
+                                    <li class="g-menu-item g-menu-item-type-component g-menu-item-118 g-standard  ">
+                                        <a class="g-menu-item-container"
+                                            href="/backup/index.php/call-for-participation">
+                                            <span class="g-menu-item-content">
+                                                <span class="g-menu-item-title">Call for Participation</span>
+
+                                            </span>
+                                        </a>
+                                    </li>
+
+
+
+
+
+
+
+                                    <li
+                                        class="g-menu-item g-menu-item-type-component g-menu-item-120 active g-standard  ">
+                                        <a class="g-menu-item-container"
+                                            href="/backup/index.php/register-for-conference">
+                                            <span class="g-menu-item-content">
+                                                <span class="g-menu-item-title">Register for Conference</span>
+
+                                            </span>
+                                        </a>
+                                    </li>
+
+
+
+
+
+
+
+                                    <li class="g-menu-item g-menu-item-type-component g-menu-item-199 g-standard  ">
+                                        <a class="g-menu-item-container" href="/backup/index.php/agenda-final">
+                                            <span class="g-menu-item-content">
+                                                <span class="g-menu-item-title">Agenda</span>
+
+                                            </span>
+                                        </a>
+                                    </li>
+
+
+
+
+
+
+
+                                    <li class="g-menu-item g-menu-item-type-component g-menu-item-125 g-standard  ">
+                                        <a class="g-menu-item-container" href="/backup/index.php/speaker">
+                                            <span class="g-menu-item-content">
+                                                <span class="g-menu-item-title">Speaker</span>
+
+                                            </span>
+                                        </a>
+                                    </li>
+
+
+
+
+
+
+
+                                    <li class="g-menu-item g-menu-item-type-component g-menu-item-235 g-standard  ">
+                                        <a class="g-menu-item-container" href="/backup/index.php/presentation-download">
+                                            <span class="g-menu-item-content">
+                                                <span class="g-menu-item-title">Presentation Download</span>
+
+                                            </span>
+                                        </a>
+                                    </li>
+
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="g-expanded">
+            <div class="g-container">
+                <div class="g-grid">
+
+                    <div class="g-block size-50">
+                        <div class="spacer"></div>
+                    </div>
+
+
+                    <div class="g-block size-50">
+                        <div class="spacer"></div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+
+
+        <section id="g-container-main" class="g-wrapper">
+            <div class="g-container">
+                <div class="g-grid">
+
+                    <div class="g-block size-100">
+                        <main id="g-mainbar">
+                            <div class="g-grid">
+
+                                <div class="g-block size-100">
+                                    <div class="g-content">
+                                        <div class="platform-content row-fluid">
+                                            <div class="span12"><noscript>&lt;div class="alert alert-danger"&gt;Warning!
+                                                    JavaScript must be enabled for this form to work
+                                                    properly.&lt;/div&gt;</noscript>
+                                                <div class="visforms visforms-form " id="visformcontainer">
+
+
+                                                    <div class="alert alert-danger error-note" style="display: none;">
+                                                    </div>
+                                                    <script type="text/javascript">
+                                                        jQuery(document).ready(function () {
+                                                            jQuery('#visform4').validate({
+                                                                submitHandler: function (form) {
+                                                                    var returnVal = true;
+                                                                    if (window["visform4SubmitAction"] && typeof window["visform4SubmitAction"] !== "undefined") {
+                                                                        returnVal = window["visform4SubmitAction"](this);
+                                                                    }
+                                                                    if (!returnVal) {
+                                                                        return false;
+                                                                    }
+                                                                    form.submit();
+                                                                    jQuery(form).find('input[type="submit"]').prop("disabled", true);
+                                                                    jQuery(form).find('input[type="reset"]').prop("disabled", true);
+                                                                    jQuery(form).find('input[type="image"]').prop("disabled", true);
+                                                                },
+                                                                wrapper: "p",
+                                                                //absolutly necessary when working with tinymce!
+                                                                ignore: ".ignore",
+                                                                rules: { "form4abstract": { minlength: 400, }, "form4presentation-upload": { filesize: 134217728, fileextension: 'bmp,pptx,csv,doc,gif,ico,jpg,jpeg,odg,odp,ods,odt,pdf,png,ppt,swf,txt,xcf,xls,BMP,CSV,DOC,GIF,ICO,JPG,JPEG,ODG,ODP,ODS,ODT,PDF,PNG,PPT,SWF,TXT,XCF,XLS,PPTX', }, "form4portrait-upload": { filesize: 134217728, fileextension: 'bmp,csv,doc,gif,ico,jpg,jpeg,odg,odp,ods,odt,pdf,png,ppt,swf,txt,xcf,xls,BMP,CSV,DOC,GIF,ICO,JPG,JPEG,ODG,ODP,ODS,ODT,PDF,PNG,PPT,SWF,TXT,XCF,XLS', }, },
+                                                                messages: { "form4presentation-upload": { filesize: "The file is to large. Max file size is 0 kb", fileextension: "This file type is not supported." }, "form4portrait-upload": { filesize: "The file is to large. Max file size is 0 kb", fileextension: "This file type is not supported." }, },
+                                                                //in accordion view, display a summary message, that form contains errors
+                                                                errorPlacement: function (error, element) {
+                                                                    var errorfieldid = element.attr("data-error-container-id");
+                                                                    if (!errorfieldid && element.attr("id") === "g-recaptcha-response") {
+                                                                        errorfieldid = 'fc-tbxrecaptcha_response_field';
+                                                                    }
+                                                                    jQuery('#visform4' + ' div.' + errorfieldid).html('');
+                                                                    error.appendTo('#visform4' + ' div.' + errorfieldid);
+                                                                    error.addClass("errorcontainer");
+                                                                },
+                                                            });
+
+                                                            jQuery('.captcharefresh4').on(
+                                                                'click', function () {
+                                                                    if (jQuery('#captchacode4')) {
+                                                                        jQuery('#captchacode4').attr('src', '/backup/index.php?option=com_visforms&task=visforms.captcha&sid=' + Math.random() + '&id=4');
+                                                                    }
+                                                                });
+                                                            jQuery('#visform4').initVisform({
+                                                                visform: { "fid": "4", "initEditor": false, "parentFormId": "visform4", "steps": 1, "nbFields": 30, "summaryLayout": "table", "summaryLayoutClass": "table", "summaryRowLayout": "tr", "oSummaryFirstElementLayout": "<td>", "cSummaryFirstElementLayout": "<\/td>", "oSummarySecondElementLayout": "<td>", "cSummarySecondElementLayout": "<\/td>", "displaysummarypage": false, "hideemptyfieldsinsummary": false, "summaryemptycaliszero": false, "fields": { "0": { "id": 48, "type": "select", "label": "academic title" }, "1": { "id": 49, "type": "text", "label": "other title" }, "2": { "id": 50, "type": "text", "label": "given name" }, "3": { "id": 51, "type": "text", "label": "family name" }, "4": { "id": 52, "type": "select", "label": "gender" }, "5": { "id": 53, "type": "email", "label": "email" }, "6": { "id": 54, "type": "text", "label": "telephone" }, "7": { "id": 55, "type": "fieldsep", "label": "trenn1" }, "8": { "id": 56, "type": "select", "label": "academic status" }, "9": { "id": 57, "type": "text", "label": "academic status" }, "10": { "id": 58, "type": "select", "label": "country of origin" }, "11": { "id": 59, "type": "text", "label": "country of origin - other" }, "12": { "id": 60, "type": "select", "label": "current location" }, "13": { "id": 61, "type": "text", "label": "current location other" }, "14": { "id": 62, "type": "text", "label": "profession" }, "15": { "id": 63, "type": "text", "label": "university" }, "16": { "id": 74, "type": "fieldsep", "label": "trenn2" }, "17": { "id": 73, "type": "radio", "label": "type of participation" }, "18": { "id": 68, "type": "text", "label": "presentation title" }, "19": { "id": 76, "type": "radio", "label": "abstract" }, "20": { "id": 69, "type": "textarea", "label": "abstract" }, "21": { "id": 75, "type": "radio", "label": "short CV" }, "22": { "id": 67, "type": "textarea", "label": "short CV" }, "23": { "id": 77, "type": "radio", "label": "presentation upload" }, "24": { "id": 70, "type": "file", "label": "presentation upload" }, "25": { "id": 71, "type": "checkbox", "label": "Please list me on the website." }, "26": { "id": 72, "type": "file", "label": "portrait upload (optional)" }, "27": { "id": 64, "type": "checkbox", "label": "I accept the privacy policy" }, "28": { "id": 65, "type": "reset", "label": "reset" }, "29": { "id": 66, "type": "submit", "label": "submit" } } },
+                                                                restrictData: { field49: "field48__other", field57: "field56__other", field59: "field58__other", field61: "field60__other", field69: "field76__abstract-enter", field70: "field77__presentation-enter", field72: "field71__1" },
+                                                                userInputs: [{ "type": "select", "label": "field48", "value": { "0": "" }, "isDisabled": false, "isForbidden": false }, { "type": "text", "label": "field49", "value": "", "isDisabled": true, "isForbidden": false }, { "type": "text", "label": "field50", "value": "", "isDisabled": false, "isForbidden": false }, { "type": "text", "label": "field51", "value": "", "isDisabled": false, "isForbidden": false }, { "type": "select", "label": "field52", "value": { "0": "" }, "isDisabled": false, "isForbidden": false }, { "type": "email", "label": "field53", "value": "", "isDisabled": false, "isForbidden": false }, { "type": "text", "label": "field54", "value": "", "isDisabled": false, "isForbidden": false }, { "type": "select", "label": "field56", "value": { "0": "" }, "isDisabled": false, "isForbidden": false }, { "type": "text", "label": "field57", "value": "", "isDisabled": true, "isForbidden": false }, { "type": "select", "label": "field58", "value": { "0": "" }, "isDisabled": false, "isForbidden": false }, { "type": "text", "label": "field59", "value": "", "isDisabled": true, "isForbidden": false }, { "type": "select", "label": "field60", "value": { "0": "Germany" }, "isDisabled": false, "isForbidden": false }, { "type": "text", "label": "field61", "value": "", "isDisabled": true, "isForbidden": false }, { "type": "text", "label": "field62", "value": "", "isDisabled": false, "isForbidden": false }, { "type": "text", "label": "field63", "value": "", "isDisabled": false, "isForbidden": false }, { "type": "radio", "label": "field73", "value": "listen", "isDisabled": false, "isForbidden": false }, { "type": "text", "label": "field68", "value": "", "isDisabled": false, "isForbidden": false }, { "type": "radio", "label": "field76", "value": "", "isDisabled": false, "isForbidden": false }, { "type": "textarea", "label": "field69", "value": "", "isDisabled": true, "isForbidden": false }, { "type": "radio", "label": "field75", "value": "", "isDisabled": false, "isForbidden": false }, { "type": "textarea", "label": "field67", "value": "", "isDisabled": false, "isForbidden": false }, { "type": "radio", "label": "field77", "value": "", "isDisabled": false, "isForbidden": false }, { "type": "checkbox", "label": "field71", "value": false, "isDisabled": false, "isForbidden": false }, { "type": "checkbox", "label": "field64", "value": false, "isDisabled": false, "isForbidden": false }]
+                                                            });
+                                                        });
+                                                    </script>
+                                                    <div class="category-desc">
+                                                        <h3>Register for the Conference</h3>
+                                                        <p>To take part in the online-conference please register. You
+                                                            will receive further information on how to access the
+                                                            conference via email.</p>
+                                                        <p>The period to register presentations has expired. Please
+                                                            register to take part at the conference as listener.</p>
+                                                    </div>
+                                                    <form method="post" name="visform" id="visform4"
+                                                        class="visform bthorizontal  form-horizontal "
+                                                        enctype="multipart/form-data" role="form"
+                                                        novalidate="novalidate">
+                                                        {% csrf_token %}
+                                                        <fieldset class="fieldset-1 active">
+                                                            <div class="control-group"><label
+                                                                    class="control-label vis_mandatory">Required
+                                                                    *</label></div>
+                                                            <div class="fc-tbxfield48"></div>
+                                                            <div class="control-group field48"><label
+                                                                    class="  control-label  " id="form4titlelbl"
+                                                                    for="field48">academic title</label>
+                                                                <div class="controls"><select id="field48"
+                                                                        name="form4title[]" class=" displayChanger"
+                                                                        data-error-container-id="fc-tbxfield48"
+                                                                        aria-labelledby="form4titlelbl">
+                                                                        <option value="">Choose a value</option>
+                                                                        <option value="Dr.">Dr.</option>
+                                                                        <option value="Prof. Dr.">Prof. Dr.</option>
+                                                                        <option value="other">other</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="fc-tbxfield49"></div>
+                                                            <div class="control-group conditional field49"
+                                                                style="display:none;"><label class="  control-label  "
+                                                                    id="form4title-otherlbl" for="field49"
+                                                                    style="display: none;">other title</label>
+                                                                <div class="controls"><input class=" ignore"
+                                                                        id="field49"
+                                                                        data-error-container-id="fc-tbxfield49"
+                                                                        aria-labelledby="form4title-otherlbl"
+                                                                        name="form4title-other"
+                                                                        placeholder="Your academic title" value=""
+                                                                        disabled="disabled" type="text"></div>
+                                                            </div>
+                                                            <div class="fc-tbxfield50"></div>
+                                                            <div class="control-group field50 required"
+                                                                aria-required="true"><label class="  control-label  "
+                                                                    id="form4given-namelbl" for="field50">given
+                                                                    name</label>
+                                                                <div class="controls"><input class="" id="field50"
+                                                                        data-error-container-id="fc-tbxfield50"
+                                                                        aria-labelledby="form4given-namelbl"
+                                                                        name="form4given-name" aria-required="true"
+                                                                        required="required" value="" type="text"></div>
+                                                            </div>
+                                                            <div class="fc-tbxfield51"></div>
+                                                            <div class="control-group field51 required"
+                                                                aria-required="true"><label class="  control-label  "
+                                                                    id="form4family-namelbl" for="field51">family
+                                                                    name</label>
+                                                                <div class="controls"><input class="" id="field51"
+                                                                        data-error-container-id="fc-tbxfield51"
+                                                                        aria-labelledby="form4family-namelbl"
+                                                                        name="form4family-name" aria-required="true"
+                                                                        required="required" value="" type="text"></div>
+                                                            </div>
+                                                            <div class="fc-tbxfield52"></div>
+                                                            <div class="control-group field52 required"
+                                                                aria-required="true"><label class="  control-label  "
+                                                                    id="form4genderlbl" for="field52">gender</label>
+                                                                <div class="controls"><select id="field52"
+                                                                        name="form4gender[]" class=""
+                                                                        data-error-container-id="fc-tbxfield52"
+                                                                        aria-labelledby="form4genderlbl"
+                                                                        aria-required="true" required="required">
+                                                                        <option value="">Choose a value</option>
+                                                                        <option value="male">male</option>
+                                                                        <option value="female">female</option>
+                                                                        <option value="divers">divers</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="fc-tbxfield53"></div>
+                                                            <div class="control-group field53 required"
+                                                                aria-required="true"><label class="  control-label  "
+                                                                    id="form4emaillbl" for="field53">email</label>
+                                                                <div class="controls"><input class="" id="field53"
+                                                                        data-error-container-id="fc-tbxfield53"
+                                                                        aria-labelledby="form4emaillbl"
+                                                                        name="form4email" aria-required="true"
+                                                                        required="required" value="" type="email"></div>
+                                                            </div>
+                                                            <div class="fc-tbxfield54"></div>
+                                                            <div class="control-group field54"><label
+                                                                    class="  control-label  " id="form4telephonelbl"
+                                                                    for="field54">telephone</label>
+                                                                <div class="controls"><input class="" id="field54"
+                                                                        data-error-container-id="fc-tbxfield54"
+                                                                        aria-labelledby="form4telephonelbl"
+                                                                        name="form4telephone" value="" type="text">
+                                                                </div>
+                                                            </div>
+                                                            <div class="fc-tbxfield55"></div>
+                                                            <div class="control-group field55">
+                                                                <div class="controls">
+                                                                    <hr class="" id="field55" name="form4trenn1">
+                                                                </div>
+                                                            </div>
+                                                            <div class="fc-tbxfield56"></div>
+                                                            <div class="control-group field56 required"
+                                                                aria-required="true"><label class="  control-label  "
+                                                                    id="form4academic-statuslbl" for="field56">academic
+                                                                    status</label>
+                                                                <div class="controls"><select id="field56"
+                                                                        name="form4academic-status[]"
+                                                                        class=" displayChanger"
+                                                                        data-error-container-id="fc-tbxfield56"
+                                                                        aria-labelledby="form4academic-statuslbl"
+                                                                        aria-required="true" required="required">
+                                                                        <option value="">Choose a value</option>
+                                                                        <option value="professor">professor</option>
+                                                                        <option value="postdoc">postdoc</option>
+                                                                        <option value="Ph.D. student">Ph.D. student
+                                                                        </option>
+                                                                        <option value="student">student</option>
+                                                                        <option value="other">other</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="fc-tbxfield57"></div>
+                                                            <div class="control-group conditional field57"
+                                                                style="display:none;"><label class="  control-label  "
+                                                                    id="form4academic-status-otherlbl" for="field57"
+                                                                    style="display: none;">academic status</label>
+                                                                <div class="controls"><input class=" ignore"
+                                                                        id="field57"
+                                                                        data-error-container-id="fc-tbxfield57"
+                                                                        aria-labelledby="form4academic-status-otherlbl"
+                                                                        name="form4academic-status-other"
+                                                                        placeholder="Your status" value=""
+                                                                        disabled="disabled" type="text"></div>
+                                                            </div>
+                                                            <div class="fc-tbxfield58"></div>
+                                                            <div class="control-group field58 required"
+                                                                aria-required="true"><label class="  control-label  "
+                                                                    id="form4country-originlbl" for="field58">country of
+                                                                    origin</label>
+                                                                <div class="controls"><select id="field58"
+                                                                        name="form4country-origin[]"
+                                                                        class=" displayChanger"
+                                                                        data-error-container-id="fc-tbxfield58"
+                                                                        aria-labelledby="form4country-originlbl"
+                                                                        aria-required="true" required="required">
+                                                                        <option value="">Choose a value</option>
+                                                                        <option value="Austria">Austria</option>
+                                                                        <option value="Belarus">Belarus</option>
+                                                                        <option value="Belgium">Belgium</option>
+                                                                        <option value="Bulgaria">Bulgaria</option>
+                                                                        <option value="Czech Republic">Czech Republic
+                                                                        </option>
+                                                                        <option value="Denmark">Denmark</option>
+                                                                        <option value="Estonia">Estonia</option>
+                                                                        <option value="Finnland">Finnland</option>
+                                                                        <option value="France">France</option>
+                                                                        <option value="Germany">Germany</option>
+                                                                        <option value="Hungary">Hungary</option>
+                                                                        <option value="Ireland">Ireland</option>
+                                                                        <option value="Italy">Italy</option>
+                                                                        <option value="Latvia">Latvia</option>
+                                                                        <option value="Lithuania">Lithuania</option>
+                                                                        <option value="Moldova">Moldova</option>
+                                                                        <option value="Netherlands">Netherlands</option>
+                                                                        <option value="Poland">Poland</option>
+                                                                        <option value="Portugal">Portugal</option>
+                                                                        <option value="Romania">Romania</option>
+                                                                        <option value="Russia">Russia</option>
+                                                                        <option value="Serbia">Serbia</option>
+                                                                        <option value="Serbia">Serbia</option>
+                                                                        <option value="Slovakia">Slovakia</option>
+                                                                        <option value="Spain">Spain</option>
+                                                                        <option value="Sweden">Sweden</option>
+                                                                        <option value="Switzerland">Switzerland</option>
+                                                                        <option value="Turkey">Turkey</option>
+                                                                        <option value="Ukraine">Ukraine</option>
+                                                                        <option value="United Kingdom">United Kingdom
+                                                                        </option>
+                                                                        <option value="other">other</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="fc-tbxfield59"></div>
+                                                            <div class="control-group conditional field59"
+                                                                style="display:none;"><label class="  control-label  "
+                                                                    id="form4origin-otherlbl" for="field59"
+                                                                    style="display: none;">country of origin -
+                                                                    other</label>
+                                                                <div class="controls"><input class=" ignore"
+                                                                        id="field59"
+                                                                        data-error-container-id="fc-tbxfield59"
+                                                                        aria-labelledby="form4origin-otherlbl"
+                                                                        name="form4origin-other"
+                                                                        placeholder="your country of origin" value=""
+                                                                        disabled="disabled" type="text"></div>
+                                                            </div>
+                                                            <div class="fc-tbxfield60"></div>
+                                                            <div class="control-group field60 required"
+                                                                aria-required="true"><label class="  control-label  "
+                                                                    id="form4current-locationlbl" for="field60">current
+                                                                    location</label>
+                                                                <div class="controls"><select id="field60"
+                                                                        name="form4current-location[]"
+                                                                        class=" displayChanger"
+                                                                        data-error-container-id="fc-tbxfield60"
+                                                                        aria-labelledby="form4current-locationlbl"
+                                                                        aria-required="true" required="required">
+                                                                        <option value="Austria">Austria</option>
+                                                                        <option value="Belarus">Belarus</option>
+                                                                        <option value="Belgium">Belgium</option>
+                                                                        <option value="Bulgaria">Bulgaria</option>
+                                                                        <option value="Czech Republic">Czech Republic
+                                                                        </option>
+                                                                        <option value="Denmark">Denmark</option>
+                                                                        <option value="Estonia">Estonia</option>
+                                                                        <option value="Finnland">Finnland</option>
+                                                                        <option value="France">France</option>
+                                                                        <option value="Germany" selected="selected">
+                                                                            Germany</option>
+                                                                        <option value="Hungary">Hungary</option>
+                                                                        <option value="Ireland">Ireland</option>
+                                                                        <option value="Italy">Italy</option>
+                                                                        <option value="Latvia">Latvia</option>
+                                                                        <option value="Lithuania">Lithuania</option>
+                                                                        <option value="Moldova">Moldova</option>
+                                                                        <option value="Netherlands">Netherlands</option>
+                                                                        <option value="Poland">Poland</option>
+                                                                        <option value="Portugal">Portugal</option>
+                                                                        <option value="Romania">Romania</option>
+                                                                        <option value="Russia">Russia</option>
+                                                                        <option value="Serbia">Serbia</option>
+                                                                        <option value="Serbia">Serbia</option>
+                                                                        <option value="Slovakia">Slovakia</option>
+                                                                        <option value="Spain">Spain</option>
+                                                                        <option value="Sweden">Sweden</option>
+                                                                        <option value="Switzerland">Switzerland</option>
+                                                                        <option value="Turkey">Turkey</option>
+                                                                        <option value="Ukraine">Ukraine</option>
+                                                                        <option value="United Kingdom">United Kingdom
+                                                                        </option>
+                                                                        <option value="other">other</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="fc-tbxfield61"></div>
+                                                            <div class="control-group conditional field61"
+                                                                style="display:none;"><label class="  control-label  "
+                                                                    id="form4current-location-otherlbl" for="field61"
+                                                                    style="display: none;">current location
+                                                                    other</label>
+                                                                <div class="controls"><input class=" ignore"
+                                                                        id="field61"
+                                                                        data-error-container-id="fc-tbxfield61"
+                                                                        aria-labelledby="form4current-location-otherlbl"
+                                                                        name="form4current-location-other"
+                                                                        placeholder="your current location" value=""
+                                                                        disabled="disabled" type="text"></div>
+                                                            </div>
+                                                            <div class="fc-tbxfield62"></div>
+                                                            <div class="control-group field62 required"
+                                                                aria-required="true"><label class="  control-label  "
+                                                                    id="form4professionlbl"
+                                                                    for="field62">profession</label>
+                                                                <div class="controls"><input class="" id="field62"
+                                                                        data-error-container-id="fc-tbxfield62"
+                                                                        aria-labelledby="form4professionlbl"
+                                                                        name="form4profession"
+                                                                        placeholder="List your faculites, e.g. Medicine, Biology, Business Economy, ..."
+                                                                        aria-required="true" required="required"
+                                                                        value="" type="text"></div>
+                                                            </div>
+                                                            <div class="fc-tbxfield63"></div>
+                                                            <div class="control-group field63 required"
+                                                                aria-required="true"><label class="  control-label  "
+                                                                    id="form4universitylbl"
+                                                                    for="field63">university</label>
+                                                                <div class="controls"><input class="" id="field63"
+                                                                        data-error-container-id="fc-tbxfield63"
+                                                                        aria-labelledby="form4universitylbl"
+                                                                        name="form4university"
+                                                                        placeholder="Current or latest university, e.g. Leipzig University, Germany"
+                                                                        aria-required="true" required="required"
+                                                                        value="" type="text"></div>
+                                                            </div>
+                                                            <div class="fc-tbxfield74"></div>
+                                                            <div class="control-group field74">
+                                                                <div class="controls">
+                                                                    <hr class="" id="field74" name="form4trenn2">
+                                                                </div>
+                                                                <div class="controls">
+                                                                    <div class="visCustomText ">
+                                                                        <p>We offer you the possibility to present your
+                                                                            scientific work on the conference. If you
+                                                                            want to share your presentation with
+                                                                            participating peers, then please chose "I
+                                                                            want to hold a presentation about my
+                                                                            scientific work.". Otherwise, please chose
+                                                                            that you just want to listen to the
+                                                                            presentations.</p>
+
+                                                                        <p><strong>If you want to hold a
+                                                                                presentation</strong>, you may upload
+                                                                            additional data to your topic underneath. It
+                                                                            is also possible to send these information
+                                                                            via email later.</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="fc-tbxfield73"></div>
+                                                            <div class="control-group field73 required"
+                                                                aria-required="true"><label class="  control-label "
+                                                                    id="form4participation-typelbl">type of
+                                                                    participation</label>
+                                                                <div class="controls"><label class="radio inline "
+                                                                        id="form4participation-typelbl_0"
+                                                                        for="field73_0">I only want to listen to the
+                                                                        presentations.<input id="field73_0"
+                                                                            name="form4participation-type"
+                                                                            value="listen" checked="checked"
+                                                                            class=" inputbox visCSSbot5 "
+                                                                            aria-required="true" required="required"
+                                                                            type="radio"
+                                                                            aria-labelledby="form4participation-typelbl form4participation-typelbl_0"
+                                                                            data-error-container-id="fc-tbxfield73"></label>
+                                                                </div>
+                                                                <div class="controls">
+                                                                    <div class="visCustomText ">
+                                                                        <p>Note:&nbsp;The period to register
+                                                                            presentations has expired. Please register
+                                                                            to take part at the conference as listener.
+                                                                            For more information, please contact: <span
+                                                                                id="cloakca77bb685a92aadcfba5b732ffdc8eea"><a
+                                                                                    href="mailto:conference@chance-for-science.de">conference@chance-for-science.de</a></span>
+                                                                            <script type="text/javascript">
+                                                                                document.getElementById('cloakca77bb685a92aadcfba5b732ffdc8eea').innerHTML = '';
+                                                                                var prefix = '&#109;a' + 'i&#108;' + '&#116;o';
+                                                                                var path = 'hr' + 'ef' + '=';
+                                                                                var addyca77bb685a92aadcfba5b732ffdc8eea = 'c&#111;nf&#101;r&#101;nc&#101;' + '&#64;';
+                                                                                addyca77bb685a92aadcfba5b732ffdc8eea = addyca77bb685a92aadcfba5b732ffdc8eea + 'ch&#97;nc&#101;-f&#111;r-sc&#105;&#101;nc&#101;' + '&#46;' + 'd&#101;';
+                                                                                var addy_textca77bb685a92aadcfba5b732ffdc8eea = 'c&#111;nf&#101;r&#101;nc&#101;' + '&#64;' + 'ch&#97;nc&#101;-f&#111;r-sc&#105;&#101;nc&#101;' + '&#46;' + 'd&#101;'; document.getElementById('cloakca77bb685a92aadcfba5b732ffdc8eea').innerHTML += '<a ' + path + '\'' + prefix + ':' + addyca77bb685a92aadcfba5b732ffdc8eea + '\'>' + addy_textca77bb685a92aadcfba5b732ffdc8eea + '<\/a>';
+                                                                            </script>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="fc-tbxfield68"></div>
+                                                            <div class="control-group field68 required"
+                                                                aria-required="true"><label class="  control-label  "
+                                                                    id="form4presentation-titlelbl"
+                                                                    for="field68">presentation title</label>
+                                                                <div class="controls"><input class="" id="field68"
+                                                                        data-error-container-id="fc-tbxfield68"
+                                                                        aria-labelledby="form4presentation-titlelbl"
+                                                                        name="form4presentation-title"
+                                                                        placeholder="Please enter the title of your presentation"
+                                                                        aria-required="true" required="required"
+                                                                        value="" type="text"></div>
+                                                            </div>
+                                                            <div class="fc-tbxfield76"></div>
+                                                            <div class="control-group field76 required"
+                                                                aria-required="true"><label class="  control-label "
+                                                                    id="form4abstract-enterlbl">abstract</label>
+                                                                <div class="controls">
+                                                                    <label class="radio inline "
+                                                                        id="form4abstract-enterlbl_0"
+                                                                        for="field76_0">Enter my abstract now<input
+                                                                            id="field76_0" name="form4abstract-enter"
+                                                                            value="abstract-enter"
+                                                                            class=" inputbox visCSSbot5  displayChanger"
+                                                                            aria-required="true" required="required"
+                                                                            type="radio"
+                                                                            aria-labelledby="form4abstract-enterlbl form4abstract-enterlbl_0"
+                                                                            data-error-container-id="fc-tbxfield76"></label>
+                                                                    <label class="radio inline "
+                                                                        id="form4abstract-enterlbl_1"
+                                                                        for="field76_1">Send my abstract later via mail<input id="field76_1"
+                                                                            name="form4abstract-enter"
+                                                                            value="none"
+                                                                            class=" inputbox visCSSbot5  displayChanger"
+                                                                            aria-required="true" required="required"
+                                                                            type="radio"
+                                                                            aria-labelledby="form4abstract-enterlbl form4abstract-enterlbl_1"
+                                                                            data-error-container-id="fc-tbxfield76"></label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="fc-tbxfield69"></div>
+                                                            <div class="control-group conditional field69 required"
+                                                                style="display:none;" aria-required="true">
+                                                                    <label class="  control-label  " id="form4abstractlbl"
+                                                                    for="field69"
+                                                                    style="display: none;">abstract</label>
+                                                                <div class="controls"><textarea class=" ignore"
+                                                                        id="field69"
+                                                                        data-error-container-id="fc-tbxfield69"
+                                                                        cols="10" rows="20"
+                                                                        aria-labelledby="form4abstractlbl"
+                                                                        name="form4abstract"
+                                                                        placeholder="Please insert the abstract for your presentation (400 - 1200 characters)"
+                                                                        aria-required="true" required="required"
+                                                                        maxlength="1200" disabled="disabled"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="fc-tbxfield75"></div>
+                                                            <div class="control-group field75 required"
+                                                                aria-required="true"><label class="  control-label "
+                                                                    id="form4short-cv-enterlbl">short CV</label>
+                                                                <div class="controls"><label class="radio inline "
+                                                                        id="form4short-cv-enterlbl_0"
+                                                                        for="field75_0">Enter my short CV now<input
+                                                                            id="field75_0" name="form4short-cv-enter"
+                                                                            value="cv-enter"
+                                                                            class=" inputbox visCSSbot5 "
+                                                                            aria-required="true" required="required"
+                                                                            type="radio"
+                                                                            onclick="show_area(true);"
+                                                                            aria-labelledby="form4short-cv-enterlbl form4short-cv-enterlbl_0"
+                                                                            data-error-container-id="fc-tbxfield75"></label><label
+                                                                        class="radio inline "
+                                                                        id="form4short-cv-enterlbl_1"
+                                                                        for="field75_1">Send my short CV later via
+                                                                        mail<input id="field75_1"
+                                                                            name="form4short-cv-enter"
+                                                                            value="none"
+                                                                            class=" inputbox visCSSbot5 "
+                                                                            aria-required="true" required="required"
+                                                                            type="radio"
+                                                                            onclick="show_area(false);"
+                                                                            aria-labelledby="form4short-cv-enterlbl form4short-cv-enterlbl_1"
+                                                                            data-error-container-id="fc-tbxfield75"></label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="fc-tbxfield67"></div>
+                                                            <div id="custom_field_cv" class="control-group field67 required"
+                                                                aria-required="true" style="display: none;">
+                                                                <label class="  control-label  "
+                                                                    id="form4short-cvlbl" for="field67"
+                                                                    style="display: none;">short CV</label>
+                                                                <div class="controls"><textarea class="" id="field67"
+                                                                        data-error-container-id="fc-tbxfield67"
+                                                                        cols="10" rows="20"
+                                                                        aria-labelledby="form4short-cvlbl"
+                                                                        name="form4short-cv"
+                                                                        placeholder="Please insert your short-cv (max. 800 characters)"
+                                                                        aria-required="true"
+                                                                        maxlength="800"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="fc-tbxfield77"></div>
+                                                            <div class="control-group field77 required"
+                                                                aria-required="true"><label class="  control-label "
+                                                                    id="form4presentation-upload-optionlbl">presentation
+                                                                    upload</label>
+                                                                <div class="controls"><label class="radio inline "
+                                                                        id="form4presentation-upload-optionlbl_0"
+                                                                        for="field77_0">Upload my presentation slides
+                                                                        now<input id="field77_0"
+                                                                            name="form4presentation-upload-option"
+                                                                            value="presentation-enter"
+                                                                            class=" inputbox visCSSbot5  displayChanger"
+                                                                            aria-required="true" required="required"
+                                                                            type="radio"
+                                                                            aria-labelledby="form4presentation-upload-optionlbl form4presentation-upload-optionlbl_0"
+                                                                            data-error-container-id="fc-tbxfield77"></label><label
+                                                                        class="radio inline "
+                                                                        id="form4presentation-upload-optionlbl_1"
+                                                                        for="field77_1">Send my presentation slides
+                                                                        later via mail<input id="field77_1"
+                                                                            name="form4presentation-upload-option"
+                                                                            value="none"
+                                                                            class=" inputbox visCSSbot5  displayChanger"
+                                                                            aria-required="true" required="required"
+                                                                            type="radio"
+                                                                            aria-labelledby="form4presentation-upload-optionlbl form4presentation-upload-optionlbl_1"
+                                                                            data-error-container-id="fc-tbxfield77"></label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="fc-tbxfield70"></div>
+                                                            <div class="control-group conditional field70"
+                                                                style="display:none;">
+                                                                <div class="controls">
+                                                                    <div class="visCustomText ">
+                                                                        <p>You may upload your presentation here - it is
+                                                                            also possible to wait for the acceptance of
+                                                                            your abstract and hand it in later (you will
+                                                                            receive an email with further information).
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <label class="  control-label  "
+                                                                    id="form4presentation-uploadlbl"
+                                                                    for="field70">presentation upload</label>
+                                                                <div class="controls"><input class=" ignore"
+                                                                        id="field70"
+                                                                        data-error-container-id="fc-tbxfield70"
+                                                                        aria-labelledby="form4presentation-uploadlbl"
+                                                                        name="form4presentation-upload"
+                                                                        disabled="disabled" type="file">
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="fc-tbxfield71"></div>
+                                                            <div class="control-group field71">
+                                                                <div class="controls">
+                                                                    <div class="visCustomText ">
+                                                                        <p>Please check if you want to be listed on the
+                                                                            website in the speakers-section.</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="controls"><label class="checkbox  "
+                                                                        id="form4announcelbl" for="field71"><input
+                                                                            class=" visCSStop10  displayChanger"
+                                                                            id="field71"
+                                                                            data-error-container-id="fc-tbxfield71"
+                                                                            aria-labelledby="form4announcelbl"
+                                                                            name="form4announce" value="1"
+                                                                            type="checkbox">Please list me on the
+                                                                        website.</label></div>
+                                                            </div>
+                                                            <div class="fc-tbxfield72"></div>
+                                                            <div class="control-group conditional field72"
+                                                                style="display:none;">
+                                                                <div class="controls">
+                                                                    <div class="visCustomText ">
+                                                                        <p>Thank you for the acceptance. If you want to
+                                                                            allow us to put your portrait next to your
+                                                                            short CV on our website, please upload a
+                                                                            portrait below (optional).</p>
+                                                                    </div>
+                                                                </div>
+                                                                <label class="  control-label  "
+                                                                    id="form4portrait-uploadlbl" for="field72">portrait
+                                                                    upload (optional)</label>
+                                                                <div class="controls"><input class=" ignore"
+                                                                        id="field72"
+                                                                        data-error-container-id="fc-tbxfield72"
+                                                                        aria-labelledby="form4portrait-uploadlbl"
+                                                                        name="form4portrait-upload" disabled="disabled"
+                                                                        type="file">
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="fc-tbxfield64"></div>
+                                                            <div class="control-group field64 required"
+                                                                aria-required="true">
+                                                                <div class="controls">
+                                                                    <div class="visCustomText ">
+                                                                        <p>I consent to Chance for Science storing and
+                                                                            using my personal data to conduct the
+                                                                            one-time conference. All data will be
+                                                                            deleted after the event.</p>
+                                                                    </div>
+                                                                </div><span class=" control-label "></span>
+                                                                <div class="controls"><label class="checkbox  "
+                                                                        id="form4privacylbl" for="field64"><input
+                                                                            class=" visCSStop10 " id="field64"
+                                                                            data-error-container-id="fc-tbxfield64"
+                                                                            aria-labelledby="form4privacylbl"
+                                                                            name="form4privacy" aria-required="true"
+                                                                            required="required" value="accepted"
+                                                                            type="checkbox">I accept the privacy
+                                                                        policy</label></div>
+                                                            </div>
+                                                            <div class="form-actions"><input class="btn " id="field65"
+                                                                    aria-label="reset" value="reset" name="form4reset"
+                                                                    type="reset">&nbsp;<input class="btn " id="field66"
+                                                                    aria-label="submit" value="submit"
+                                                                    name="form4submit" type="submit">&nbsp;</div>
+                                                        </fieldset> <input type="hidden" value="4" name="postid">
+                                                        <input type="hidden" value="pagebreak"
+                                                            name="addSupportedFieldType[]"> <input type="hidden"
+                                                            value="aHR0cHM6Ly9jaGFuY2UtZm9yLXNjaWVuY2UuZXUvYmFja3VwL2luZGV4LnBocC9yZWdpc3Rlci1mb3ItY29uZmVyZW5jZQ,,"
+                                                            name="return"><input type="hidden"
+                                                            name="ed35cb350db4945533bf09118b1f6000" value="1">
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </main>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <footer id="g-footer">
+            <div class="g-container">
+                <div class="g-grid">
+
+                    <div class="g-block size-46">
+                        <div id="copyright-1736-particle" class="g-content g-particle">
+                            <div class="g-copyright ">
+                                ©
+                                Chance for Science gUG (haftungsbeschränkt)
+                                2022
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="g-block size-39">
+                        <div class="g-content">
+                            <div class="platform-content">
+                                <div class="moduletable  footermenu">
+                                    <ul class="nav menu footermenu mod-list">
+                                        <li class="item-123"><a
+                                                href="https://home.uni-leipzig.de/~chanceforscience/index.php?option=com_content&amp;view=article&amp;id=5&amp;Itemid=139&amp;lang=en"
+                                                onclick="window.open(this.href, 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,'); return false;">Imprint/Data
+                                                Security</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="g-block size-15">
+                        <div id="totop-8670-particle" class="g-content g-particle">
+                            <div class="">
+                                <div class="g-totop">
+                                    <a href="#" id="g-totop" rel="nofollow" title="Back to top"
+                                        aria-label="Back to top">
+                                        Back to top <i class="fa fa-chevron-up fa-fw"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+
+
+
+    </div>
+
+
+    <script type="text/javascript" src="/backup/media/gantry5/assets/js/main.js?629f2700"></script>
+
+    <script>
+        function show_area(is_show){
+            let text = document.getElementById('custom_field_cv')
+            if (is_show){
+                text.style.display = "block";
+                let area = document.getElementById('field67')
+                area.setAttribute("required", "required");
+            } else {
+                text.style.display = "none";
+                let area = document.getElementById('field67')
+                area.removeAttribute('required');
+                let message = document.getElementsByClassName("fc-tbxfield67")[0].getElementsByClassName("errorcontainer")[0];
+                message.style.display = "none";
+            }
+        }
+    </script>
+
+
+
+
+
+</body>
+
+</html>
