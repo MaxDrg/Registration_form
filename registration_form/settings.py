@@ -74,26 +74,26 @@ WSGI_APPLICATION = 'registration_form.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-## DATABASES = {  
-##     'default': {  
-##         'ENGINE': os.environ.get('ENGINE'),  
-##         'NAME': os.environ.get('NAME'),  
-##         'USER': os.environ.get('USER'),  
-##         'PASSWORD': os.environ.get('PASS'),  
-##         'HOST': os.environ.get('HOST'), 
-##          'PORT': os.environ.get('PORT'), 
-##         'OPTIONS': {  
-##             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
-##         }  
-##     }  
-## }  
+DATABASES = {  
+    'default': {  
+        'ENGINE': os.environ.get('ENGINE'),  
+        'NAME': os.environ.get('NAME'),  
+        'USER': os.environ.get('USER'),  
+        'PASSWORD': os.environ.get('PASS'),  
+        'HOST': os.environ.get('HOST'), 
+         'PORT': os.environ.get('PORT'), 
+        'OPTIONS': {  
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
+        }  
+    }  
+}  
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
-    }
-}
+## DATABASES = {
+##     'default': {
+##         'ENGINE': 'django.db.backends.sqlite3',
+##         'NAME': 'mydatabase',
+##     }
+## }
 
 
 # Password validation
