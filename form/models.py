@@ -1539,16 +1539,15 @@ class ConfJevUsers(models.Model):
         managed = False
         db_table = 'conf_jev_users'
 
-
-class ConfJeventsCatmap(models.Model):
-    evid = models.AutoField()
-    catid = models.IntegerField()
-    ordering = models.PositiveIntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'conf_jevents_catmap'
-        unique_together = (('evid', 'catid'),)
+# class ConfJeventsCatmap(models.Model):
+#     evid = models.AutoField()
+#     catid = models.IntegerField()
+#     ordering = models.PositiveIntegerField()
+# 
+#     class Meta:
+#         managed = False
+#         db_table = 'conf_jevents_catmap'
+#         unique_together = (('evid', 'catid'),)
 
 
 class ConfJeventsException(models.Model):
