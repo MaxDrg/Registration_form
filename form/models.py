@@ -7,7 +7,7 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from datetime import datetime
 from django.db import models
-
+from django.utils import timezone
 
 class ConfActionLogConfig(models.Model):
     type_title = models.CharField(max_length=255)
@@ -250,15 +250,15 @@ class ConfContent(models.Model):
     fulltext = models.TextField()
     state = models.IntegerField(default=1)
     catid = models.PositiveIntegerField(default=10)
-    created = models.DateTimeField(default=datetime.now())
+    created = models.DateTimeField(default=timezone.now())
     created_by = models.PositiveIntegerField(default=0)
     created_by_alias = models.CharField(max_length=255)
-    modified = models.DateTimeField(default=datetime.now())
+    modified = models.DateTimeField(default=timezone.now())
     modified_by = models.PositiveIntegerField(default=0)
     checked_out = models.PositiveIntegerField(default=0)
-    checked_out_time = models.DateTimeField(default=datetime.now())
-    publish_up = models.DateTimeField(default=datetime.now())
-    publish_down = models.DateTimeField(default=datetime.now())
+    checked_out_time = models.DateTimeField(default=timezone.now())
+    publish_up = models.DateTimeField(default=timezone.now())
+    publish_down = models.DateTimeField(default=timezone.now())
     images = models.TextField()
     urls = models.TextField()
     attribs = models.CharField(max_length=5120)
