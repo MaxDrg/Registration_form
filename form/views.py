@@ -40,6 +40,7 @@ def form(request: HttpRequest):
         data = models.ConfContent(
             title = title,
             state=1,
+            catid=10,
             access=check_access(abstract, cv)
         )
         data.save()
