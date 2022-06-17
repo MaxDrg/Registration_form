@@ -267,7 +267,7 @@ class ConfContent(models.Model):
     metakey = models.TextField()
     metadesc = models.TextField()
     access = models.PositiveIntegerField()
-    hits = models.PositiveIntegerField(default=0)
+    hits = models.PositiveIntegerField(default='0')
     metadata = models.TextField(default=0)
     featured = models.PositiveIntegerField(default=0)
     language = models.CharField(max_length=7)
