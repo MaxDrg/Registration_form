@@ -5,9 +5,9 @@
 #   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
-from datetime import datetime
-from django.db import models
 from django.utils import timezone
+from django.db import models
+import django
 
 class ConfActionLogConfig(models.Model):
     type_title = models.CharField(max_length=255)
@@ -250,15 +250,15 @@ class ConfContent(models.Model):
     fulltext = models.TextField()
     state = models.IntegerField(default=1)
     catid = models.PositiveIntegerField(default=10)
-    created = models.DateTimeField(default=timezone.now())
+    created = models.DateTimeField(default=timezone.now)
     created_by = models.PositiveIntegerField(default=0)
     created_by_alias = models.CharField(max_length=255)
-    modified = models.DateTimeField(default=timezone.now())
+    modified = models.DateTimeField(default=timezone.now)
     modified_by = models.PositiveIntegerField(default=0)
     checked_out = models.PositiveIntegerField(default=0)
-    checked_out_time = models.DateTimeField(default=timezone.now())
-    publish_up = models.DateTimeField(default=timezone.now())
-    publish_down = models.DateTimeField(default=timezone.now())
+    checked_out_time = models.DateTimeField(default=timezone.now)
+    publish_up = models.DateTimeField(default=timezone.now)
+    publish_down = models.DateTimeField(default=timezone.now)
     images = models.TextField()
     urls = models.TextField()
     attribs = models.CharField(max_length=5120)
@@ -267,7 +267,7 @@ class ConfContent(models.Model):
     metakey = models.TextField()
     metadesc = models.TextField()
     access = models.PositiveIntegerField()
-    hits = models.PositiveIntegerField()
+    hits = models.PositiveIntegerField(default=0)
     metadata = models.TextField(default=0)
     featured = models.PositiveIntegerField(default=0)
     language = models.CharField(max_length=7)
