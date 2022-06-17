@@ -1,4 +1,5 @@
 from ast import alias
+from os import access
 from django.http import HttpRequest
 from django.shortcuts import render
 from . import models
@@ -9,6 +10,7 @@ def form(request: HttpRequest):
         check_checkbox = lambda check, file: request.POST[file] if not check == 'none' else None
         check_file = lambda check, data_name: request.FILES[data_name] if not check == 'none' else None
         check_image = lambda check, data_name: request.FILES[data_name] if check == '1' else None
+        check_access = lambda abstract, cv: 1 if abstract and cv else 0
 
         print(check_others(request.POST['form4title[]'], 'form4title-other'),)
         print(request.POST['form4given-name'],)
@@ -31,9 +33,14 @@ def form(request: HttpRequest):
         title = f"{check_others(request.POST['form4title[]'], 'form4title-other')} {request.POST['form4given-name']} {request.POST['form4family-name']}"
 
         print(title)
+    
+        abstract = check_checkbox(request.POST['form4abstract-enter'], 'form4abstract')
+        cv = check_checkbox(request.POST['form4short-cv-enter'], 'form4short-cv')
 
         data = models.ConfContent(
-            title = title
+            title = title,
+            state=1,
+            access=check_access(abstract, cv)
         )
         data.save()
         
