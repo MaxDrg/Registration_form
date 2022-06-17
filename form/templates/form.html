@@ -22,6 +22,7 @@
     <link href="/backup/media/gantry5/assets/css/font-awesome.min.css?629f26ff" rel="stylesheet">
     <link href="/backup/templates/g5_helium/custom/css-compiled/helium-joomla_12.css?629f2bb4" rel="stylesheet">
     <link href="/backup/templates/g5_helium/custom/css-compiled/custom_12.css?629f2bb4" rel="stylesheet">
+    <link href="./css/select.css" rel="stylesheet">
     <style>
         form#visform4 div.control-group.required span.control-label:before {
             content: "*";
@@ -50,6 +51,7 @@
     </style>
     <script type="text/javascript" async="" src="https://stats.g.doubleclick.net/dc.js"></script>
     <script src="/backup/media/jui/js/jquery.min.js?159f1394001f9ba6879ef9aa43905dac"></script>
+    <script src="./js/select.js"></script>
     <script src="/backup/media/jui/js/jquery-noconflict.js?159f1394001f9ba6879ef9aa43905dac"></script>
     <script src="/backup/media/jui/js/jquery-migrate.min.js?159f1394001f9ba6879ef9aa43905dac"></script>
     <script src="/backup/media/jui/js/bootstrap.min.js?159f1394001f9ba6879ef9aa43905dac"></script>
@@ -886,13 +888,18 @@
                                                                 aria-required="true"><label class="  control-label  "
                                                                     id="form4professionlbl"
                                                                     for="field62">profession</label>
-                                                                <div class="controls"><input class="" id="field62"
+                                                                <div class="controls"><select class="" id="field62"
                                                                         data-error-container-id="fc-tbxfield62"
                                                                         aria-labelledby="form4professionlbl"
                                                                         name="form4profession"
                                                                         placeholder="List your faculites, e.g. Medicine, Biology, Business Economy, ..."
                                                                         aria-required="true" required="required"
-                                                                        value="" type="text"></div>
+                                                                        value="" type="text">
+                                                                        <option>Item 1</option>
+                                                                        <option>item 2</option>
+                                                                        <option>item 3</option>
+                                                                        <option>item 4</option>
+                                                                    </select></div>
                                                             </div>
                                                             <div class="fc-tbxfield63"></div>
                                                             <div class="control-group field63 required"
