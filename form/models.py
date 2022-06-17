@@ -1539,6 +1539,7 @@ class ConfJevUsers(models.Model):
         managed = False
         db_table = 'conf_jev_users'
 
+
 # class ConfJeventsCatmap(models.Model):
 #     evid = models.AutoField()
 #     catid = models.IntegerField()
