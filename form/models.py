@@ -242,7 +242,7 @@ class ConfContactDetails(models.Model):
 
 
 class ConfContent(models.Model):
-    asset_id = models.PositiveIntegerField()
+    asset_id = models.PositiveIntegerField(default=0)
     title = models.CharField(max_length=255)
     alias = models.CharField(max_length=400)
     introtext = models.TextField()
