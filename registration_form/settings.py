@@ -135,7 +135,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = "/staticfiles/"
 
 STATICFILES_DIRS = [
-    BASE_DIR / "forum/templates/assets"
+    BASE_DIR / "form/templates/assets"
 ]
 
 # Default primary key field type
