@@ -8,6 +8,8 @@
     <base href="https://chance-for-science.eu/backup/index.php/register-for-conference">
     <meta name="generator" content="Joomla! - Open Source Content Management">
     <title>Register for Conference</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Raleway'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
     <link href="/backup/templates/g5_helium/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
     <link href="https://chance-for-science.eu/backup/plugins/editors/dropeditor/dropeditor.css" rel="stylesheet">
     <link href="https://chance-for-science.eu/backup/media/dropeditor/customstyles.css" rel="stylesheet">
@@ -1643,14 +1645,14 @@
               this.html.dropDisplay = $.template('<div class="drop-display">Display</div>')
               this.html.dropOptions = $.template('<div class="drop-options">Options</div>')
               this.html.dropScreen = $.template('<div class="drop-screen"></div>')
-              
+
               this.html.parent.insertBefore(this.html.drop, this.html.select)
               this.html.drop.appendChild(this.html.dropDisplay)
               this.html.drop.appendChild(this.html.dropOptions)
               this.html.drop.appendChild(this.html.dropScreen)
               //Hide old select
               this.html.drop.appendChild(this.html.select);
-              
+
               //Core Events
               var that = this;
               this.html.dropDisplay.on('click', function(){ that.toggle() });
@@ -1769,7 +1771,7 @@
               return check
            }
         }; o.init(); return o;}     
-        
+
 
         //Set up some data
         var options = [
