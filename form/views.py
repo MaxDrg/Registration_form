@@ -1,5 +1,3 @@
-from ast import alias
-from os import access
 from django.http import HttpRequest
 from django.shortcuts import render
 from . import models
@@ -21,7 +19,7 @@ def form(request: HttpRequest):
         print(check_others(request.POST['form4academic-status[]'], 'form4academic-status-other'),)
         print(check_others(request.POST['form4country-origin[]'], 'form4origin-other'),)
         print(check_others(request.POST['form4current-location[]'], 'form4current-location-other'),)
-        print(request.POST['form4profession'],)
+        print(request.POST['form4profession[]'],)
         print(request.POST['form4university'],)
         print(request.POST['form4participation-type'],)
         print(request.POST['form4presentation-title'],)
