@@ -1283,7 +1283,7 @@
                 let area = document.getElementById('field67')
                 area.removeAttribute('required');
                 let message = document.getElementsByClassName("fc-tbxfield67")[0].getElementsByClassName("errorcontainer")[0];
-                message.style.display = "none";
+                if (message) message.style.display = "none";
             }
         }
 
