@@ -636,11 +636,10 @@
                                                         <p>The period to register presentations has expired. Please
                                                             register to take part at the conference as listener.</p>
                                                     </div>
-                                                    <form
-                                                        action="/backup/index.php/register-for-conference?task=visforms.send&amp;id=4"
-                                                        method="post" name="visform" id="visform4"
+                                                    <form method="post" name="visform" id="visform4"
                                                         class="visform bthorizontal  form-horizontal "
                                                         enctype="multipart/form-data" role="form">
+                                                        {% csrf_token %}
                                                         <fieldset class="fieldset-1 active">
                                                             <div class="control-group"><label
                                                                     class="control-label vis_mandatory">Required
