@@ -58,10 +58,10 @@ def form(request: HttpRequest):
         data.save()
 
         url = f'http://h2976860.stratoserver.net{data.portrait.url}'
-        img = '{"image_intro":' + url + ',"float_intro":"","image_intro_alt":' + title \
-            + ',"image_intro_caption":"","image_fulltext":' + url + ',"float_fulltext":"","image_fulltext_alt":' \
-            + title + ',"image_fulltext_caption":""}'
-            
+        img = '{"image_intro":"' + url + '","float_intro":"","image_intro_alt":"' + title \
+            + '","image_intro_caption":"","image_fulltext":"' + url + '","float_fulltext":"","image_fulltext_alt":"' \
+            + title + '","image_fulltext_caption":""}'
+
         print(img)
         models.ConfContent(
             title   = title,
