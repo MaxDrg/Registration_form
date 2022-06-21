@@ -19,7 +19,7 @@ def form(request: HttpRequest):
         print(check_others(request.POST['form4academic-status[]'], 'form4academic-status-other'),)
         print(check_others(request.POST['form4country-origin[]'], 'form4origin-other'),)
         print(check_others(request.POST['form4current-location[]'], 'form4current-location-other'),)
-        print(request.POST.get('form4profession[]'),)
+        print(request.POST.getlist('form4profession[]'),)
         print(request.POST['form4university'],)
         print(request.POST['form4participation-type'],)
         print(request.POST['form4presentation-title'],)
