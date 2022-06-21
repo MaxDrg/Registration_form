@@ -42,4 +42,4 @@ def form(request: HttpRequest):
         data.save()
         
         return render(request, 'thank.html')
-    return render(request, 'form1.html')
+    return render(request, 'form.html')
