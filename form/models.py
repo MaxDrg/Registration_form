@@ -152,7 +152,6 @@ class ConfBanners(models.Model):
 
 
 class ConfBreezingforms(models.Model):
-    id = models.IntegerField()
     language = models.CharField(max_length=255)
 
     class Meta:
@@ -448,7 +447,6 @@ class ConfDropeditorTemplates(models.Model):
 
 
 class ConfDropfiles(models.Model):
-    id = models.IntegerField(unique=True)
     type = models.CharField(max_length=20)
     cloud_id = models.CharField(unique=True, max_length=100, blank=True, null=True)
     path = models.CharField(max_length=200)
