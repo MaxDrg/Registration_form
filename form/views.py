@@ -53,13 +53,16 @@ def form(request: HttpRequest):
             abstract            = check_checkbox(request.POST['form4abstract-enter'], 'form4abstract'),
             short_cv            = check_checkbox(request.POST['form4short-cv-enter'], 'form4short-cv'),
             presentation_upload = check_file(request.POST['form4presentation-upload-option'], 'form4presentation-upload'),
-            portrait            = check_image(request.POST.get('form4announce'), 'form4portrait-upload')
+            portrait            = image
         )
         data.save()
-        print(data.portrait.url)
+
+        url = f'http://h2976860.stratoserver.net{data.portrait.url}'
+        img = '{"image_intro":{},"float_intro":"","image_intro_alt":{},"image_intro_caption":"","image_fulltext":{},"float_fulltext":"","image_fulltext_alt":{},"image_fulltext_caption":""}'.format(url, title, url, title)
 
         models.ConfContent(
             title   = title,
+            images  = img,
             access  = check_access(image)
         ).save()
         

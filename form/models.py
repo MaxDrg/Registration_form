@@ -7,7 +7,6 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.utils import timezone
 from django.db import models
-import django
 
 class ConfActionLogConfig(models.Model):
     type_title = models.CharField(max_length=255)
