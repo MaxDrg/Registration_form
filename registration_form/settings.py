@@ -134,9 +134,9 @@ STATIC_URL = 'static/'
 
 STATIC_ROOT = "/staticfiles/"
 
-STATICFILES_DIRS = [
-    BASE_DIR / "forum/templates/assets"
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / "forum/templates/assets"
+# ]
 
 MEDIA_URL = '/media/'
 
