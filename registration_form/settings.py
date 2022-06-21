@@ -132,6 +132,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = "/staticfiles/"
+
+STATICFILES_DIRS = [
+    BASE_DIR / "forum/templates/assets"
+]
+
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = '/mediafiles/'
