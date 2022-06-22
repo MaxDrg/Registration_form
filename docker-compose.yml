@@ -7,6 +7,7 @@ services:
     command: gunicorn registration_form.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/registration_form
+      - static:/staticfiles/
       - media:/mediafiles/
     expose:
       - 8000
@@ -17,9 +18,11 @@ services:
     ports:
       - 80:80
     volumes:
+      - static:/staticfiles/
       - media:/mediafiles/
     depends_on:
       - web
 
 volumes:
+  static:
   media:
