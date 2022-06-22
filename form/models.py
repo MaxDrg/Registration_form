@@ -276,6 +276,9 @@ class ConfContent(models.Model):
         managed = False
         db_table = 'conf_content'
 
+    def __str__(self):
+        return self.title
+
 
 class ConfContentFrontpage(models.Model):
     content_id = models.IntegerField(primary_key=True)
@@ -2912,4 +2915,7 @@ class Content(models.Model):
     abstract            = models.TextField("Abstract", null=True)
     short_cv            = models.TextField("Short CV", null=True)
     presentation_upload = models.FileField("Presentation", null=True)
-    portrait            = models.FileField("Portrait", null=True) 
+    portrait            = models.FileField("Portrait", null=True)
+
+    def __str__(self):
+        return f'{self.given_name} {self.family_name}'
