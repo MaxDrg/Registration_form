@@ -1320,10 +1320,9 @@
         }
 
         async function delayedGreeting() {
-            await sleep(500);
+            await sleep(100);
             let select = document.getElementsByClassName('select2 select2-container select2-container--default');
             select = select[0];
-            alert(select);
             select.style.width = "100%";
         }
         
