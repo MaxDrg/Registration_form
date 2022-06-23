@@ -68,6 +68,10 @@ def form(request: HttpRequest):
             images  = img,
             access  = check_access(image)
         ).save()
+
+        a = models.ConfTags.objects.all()
+        for b in a:
+            print(b.title)
         
         return render(request, 'thank.html')
     return render(request, 'form.html', 
