@@ -68,14 +68,15 @@ def form(request: HttpRequest):
             images  = img,
             access  = check_access(image)
         ).save()
+        
+        return render(request, 'thank.html')
 
     a = models.ConfTags.objects.all()
     print(a)
     for b in a:
         print(b.title)
-        
-        return render(request, 'thank.html')
+
     return render(request, 'form.html', 
-                {
-                    'professions': models.ConfTags.objects.all()
-                })
+        {
+            'professions': models.ConfTags.objects.all()
+        })
