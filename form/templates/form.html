@@ -1315,6 +1315,10 @@
 
         delayedGreeting()
 
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
         async function delayedGreeting() {
             await sleep(2000);
             let select = document.getElementsByClassName('select2 select2-container select2-container--default');
