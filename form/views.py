@@ -70,6 +70,7 @@ def form(request: HttpRequest):
         ).save()
 
         a = models.ConfTags.objects.all()
+        print(a)
         for b in a:
             print(b.title)
         
