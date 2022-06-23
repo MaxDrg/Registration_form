@@ -78,5 +78,5 @@ def form(request: HttpRequest):
 
     return render(request, 'form.html', 
         {
-            'professions': models.ConfTags.objects.all()
+            'professions': a
         })
