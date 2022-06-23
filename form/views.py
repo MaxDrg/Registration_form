@@ -72,5 +72,5 @@ def form(request: HttpRequest):
         return render(request, 'thank.html')
     return render(request, 'form.html', 
                 {
-                    'professions': models.ConfTags.objects.exclude(title=u'ROOT', title=u'Host', title=u'Moderator', title=u'Speaker', title=u'Support')
+                    'professions': models.ConfTags.objects.all()
                 })
