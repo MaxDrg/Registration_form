@@ -906,45 +906,16 @@
                                                                     aria-labelledby="form4professionlbl"
                                                                     name="form4profession[]"
                                                                     aria-required="true" required="required">
-                                                                    <option value="Austria">Austria</option>
-                                                                    <option value="Belarus">Belarus</option>
-                                                                    <option value="Belgium">Belgium</option>
-                                                                    <option value="Bulgaria">Bulgaria</option>
-                                                                    <option value="Czech Republic">Czech Republic
-                                                                    </option>
-                                                                    <option value="Denmark">Denmark</option>
-                                                                    <option value="Estonia">Estonia</option>
-                                                                    <option value="Finnland">Finnland</option>
-                                                                    <option value="France">France</option>
-                                                                    <option value="Germany">Germany</option>
-                                                                    <option value="Hungary">Hungary</option>
-                                                                    <option value="Ireland">Ireland</option>
-                                                                    <option value="Italy">Italy</option>
-                                                                    <option value="Latvia">Latvia</option>
-                                                                    <option value="Lithuania">Lithuania</option>
-                                                                    <option value="Moldova">Moldova</option>
-                                                                    <option value="Netherlands">Netherlands</option>
-                                                                    <option value="Poland">Poland</option>
-                                                                    <option value="Portugal">Portugal</option>
-                                                                    <option value="Romania">Romania</option>
-                                                                    <option value="Russia">Russia</option>
-                                                                    <option value="Serbia">Serbia</option>
-                                                                    <option value="Serbia">Serbia</option>
-                                                                    <option value="Slovakia">Slovakia</option>
-                                                                    <option value="Spain">Spain</option>
-                                                                    <option value="Sweden">Sweden</option>
-                                                                    <option value="Switzerland">Switzerland</option>
-                                                                    <option value="Turkey">Turkey</option>
-                                                                    <option value="Ukraine">Ukraine</option>
-                                                                    <option value="United Kingdom">United Kingdom
-                                                                    </option>
+                                                                    {% for profession in professions %}
+                                                                        <option value="{{ profession.id }}">{{ profession.title }}</option>
+                                                                    {% endfor %}
                                                                 </select>
                                                                 </div>
                                                             </div>
 
-                                                            <div class="fc-tbxfield54"></div>
-                                                            <div class="control-group"><label class="  control-label  " id="form4telephonelbl" for="field54">Other Profession(s)</label>
-                                                                <div class="controls"><input class="" id="field54" data-error-container-id="fc-tbxfield54" placeholder="Please enter your areas of expertise vertical bar-separated, example: test1|test2|test3" aria-labelledby="form4telephonelbl" name="" value="Other professions" type="text">
+                                                            <div class="fc-tbxfield78"></div>
+                                                            <div class="control-group"><label class="  control-label  " id="form4other-professionlbl" for="field78">Other Profession(s)</label>
+                                                                <div class="controls"><input class="" id="field78" data-error-container-id="fc-tbxfield78" placeholder="Please enter your areas of expertise vertical bar-separated, example: test1|test2|test3" aria-labelledby="form4other-professionlbl" name="form4other-profession" value="" type="text">
                                                                 </div>
                                                             </div>
 
