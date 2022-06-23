@@ -71,12 +71,7 @@ def form(request: HttpRequest):
         
         return render(request, 'thank.html')
 
-    a = models.ConfTags.objects.all()
-    print(a)
-    for b in a:
-        print(b.title)
-
     return render(request, 'form.html', 
         {
-            'professions': a
+            'professions': models.ConfTags.objects.all()
         })
