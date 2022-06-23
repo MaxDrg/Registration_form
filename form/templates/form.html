@@ -1313,9 +1313,16 @@
             $('.chosen-select').select2();
         });
 
-        let select = document.getElementsByClassName('select2 select2-container select2-container--default');
-        select = select[0];
-        select.style.width = "100%";
+        delayedGreeting()
+
+        async function delayedGreeting() {
+            await sleep(2000);
+            let select = document.getElementsByClassName('select2 select2-container select2-container--default');
+            select = select[0];
+            alert(select);
+            select.style.width = "100%";
+        }
+        
     </script>
 
 
