@@ -907,7 +907,7 @@
                                                                     name="form4profession[]"
                                                                     aria-required="true" required="required">
                                                                     {% for profession in professions %}
-                                                                        {% if not profession.title == 'ROOT' %}
+                                                                        {% if not profession.title == 'ROOT' and not profession.title == 'Host' and not profession.title == 'Moderator' and not profession.title == 'Speaker' and not profession.title == 'Support' %}
                                                                             <option value="{{ profession.id }}">{{ profession.title }}</option>
                                                                         {% endif %}
                                                                     {% endfor %}
