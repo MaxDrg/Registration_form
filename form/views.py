@@ -65,26 +65,22 @@ def form(request: HttpRequest):
             portrait            = image
         )
         data.save()
+        i = data.id
+        print(i)
 
-        img = None
-        print(data.portrait)
+        img = '{"image_intro":"images\/Profil.png","float_intro":"","image_intro_alt":"' + title \
+                + '","image_intro_caption":"","image_fulltext":"images\/Profil.png","float_fulltext":"","image_fulltext_alt":"' \
+                + title + '","image_fulltext_caption":""}'
 
         if data.portrait:
             url = f'http://h2976860.stratoserver.net{data.portrait.url}'
             img = '{"image_intro":"' + url + '","float_intro":"","image_intro_alt":"' + title \
                 + '","image_intro_caption":"","image_fulltext":"' + url + '","float_fulltext":"","image_fulltext_alt":"' \
                 + title + '","image_fulltext_caption":""}'
-        else:
-            img = '{"image_intro":"images\/Profil.png","float_intro":"","image_intro_alt":"' + title \
-                + '","image_intro_caption":"","image_fulltext":"images\/Profil.png","float_fulltext":"","image_fulltext_alt":"' \
-                + title + '","image_fulltext_caption":""}'
 
         access = check_access(abstract, cv, image)
 
-        print('core_id')
         core_id = models.ConfContentitemTagMap.objects.latest('core_content_id').core_content_id + 1
-        print('core_id')
-        print(core_id)
 
         for tag in request.POST.getlist('form4profession[]'):
             models.ConfContentitemTagMap(
