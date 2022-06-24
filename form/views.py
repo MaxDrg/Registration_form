@@ -1,3 +1,4 @@
+from distutils import core
 from django.http import HttpRequest
 from django.shortcuts import render
 from . import models
@@ -80,7 +81,12 @@ def form(request: HttpRequest):
 
         access = check_access(abstract, cv, image)
 
-        core_id = models.ConfContentitemTagMap.objects.latest('id')
+        cores = models.ConfContentitemTagMap.objects.all()
+        core_id = 0
+        
+        for core in cores:
+            if core.core_content_id > core_id:
+                core_id = core.core_content_id 
 
         print(core_id)
 
