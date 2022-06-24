@@ -80,7 +80,7 @@ def form(request: HttpRequest):
 
         access = check_access(abstract, cv, image)
 
-        core_id = models.ConfContentitemTagMap.objects.latest('core_content_id')
+        core_id = models.ConfContentitemTagMap.objects.latest('id')
 
         print(core_id)
 
