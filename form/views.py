@@ -81,7 +81,9 @@ def form(request: HttpRequest):
 
         access = check_access(abstract, cv, image)
 
+        print('core_id')
         core_id = models.ConfContentitemTagMap.objects.latest('core_content_id')
+        print('core_id')
         print(core_id)
 
         for tag in request.POST.getlist('form4profession[]'):
