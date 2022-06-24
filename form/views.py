@@ -9,7 +9,7 @@ def form(request: HttpRequest):
         check_checkbox = lambda check, file: request.POST[file] if not check == 'none' else None
         check_file = lambda check, data_name: request.FILES[data_name] if not check == 'none' else None
         check_image = lambda check, data_name: request.FILES[data_name] if check == '1' else None
-        check_access = lambda abstract, cv, image: 1 if abstract and cv and image  else 0
+        check_access = lambda abstract, cv, image: 1 if abstract and cv and image else 0
 
         academic_title = check_title(request.POST['form4title[]'])
 
@@ -73,8 +73,21 @@ def form(request: HttpRequest):
             img = '{"image_intro":"' + url + '","float_intro":"","image_intro_alt":"' + title \
                 + '","image_intro_caption":"","image_fulltext":"' + url + '","float_fulltext":"","image_fulltext_alt":"' \
                 + title + '","image_fulltext_caption":""}'
+        else:
+            img = '{"image_intro":"images\/Profil.png","float_intro":"","image_intro_alt":"' + title \
+                + '","image_intro_caption":"","image_fulltext":"images\/Profil.png","float_fulltext":"","image_fulltext_alt":"' \
+                + title + '","image_fulltext_caption":""}'
 
         access = check_access(abstract, cv, image)
+
+        core_id = models.ConfContentitemTagMap.objects.latest('core_content_id') + 1
+
+        for tag in request.POST.getlist('form4profession[]'):
+            models.ConfContentitemTagMap(
+                core_content_id = core_id,
+                content_item_id = data.id,
+                tag_id = tag
+            ).save()
 
         print(f'access = {access}')
 

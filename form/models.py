@@ -316,12 +316,12 @@ class ConfContentTypes(models.Model):
 
 
 class ConfContentitemTagMap(models.Model):
-    type_alias = models.CharField(max_length=255)
+    type_alias = models.CharField(max_length=255, default='com_content.article')
     core_content_id = models.PositiveIntegerField()
     content_item_id = models.IntegerField()
     tag_id = models.PositiveIntegerField()
-    tag_date = models.DateTimeField()
-    type_id = models.IntegerField()
+    tag_date = models.DateTimeField(default=timezone.now)
+    type_id = models.IntegerField(default=1)
 
     class Meta:
         managed = False
