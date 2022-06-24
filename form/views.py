@@ -65,7 +65,6 @@ def form(request: HttpRequest):
             portrait            = image
         )
         data.save()
-        data_id = models.Content.objects.latest('id').id
 
         img = '{"image_intro":"images\/Profil.png","float_intro":"","image_intro_alt":"' + title \
                 + '","image_intro_caption":"","image_fulltext":"images\/Profil.png","float_fulltext":"","image_fulltext_alt":"' \
@@ -81,18 +80,20 @@ def form(request: HttpRequest):
 
         core_id = models.ConfContentitemTagMap.objects.latest('core_content_id').core_content_id + 1
 
-        for tag in request.POST.getlist('form4profession[]'):
-            models.ConfContentitemTagMap(
-                core_content_id = core_id,
-                content_item_id = data_id,
-                tag_id = tag
-            ).save()
-
-        models.ConfContent(
+        data = models.ConfContent(
             title   = title,
             images  = img,
             access  = access
         ).save()
+
+        for tag in request.POST.getlist('form4profession[]'):
+            models.ConfContentitemTagMap(
+                core_content_id = core_id,
+                content_item_id = data.id,
+                tag_id = tag
+            ).save()
+
+        
         
         return render(request, 'thank.html')
 
