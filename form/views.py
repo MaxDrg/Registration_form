@@ -62,7 +62,6 @@ def form(request: HttpRequest):
             + '","image_intro_caption":"","image_fulltext":"' + url + '","float_fulltext":"","image_fulltext_alt":"' \
             + title + '","image_fulltext_caption":""}'
 
-        print(img)
         models.ConfContent(
             title   = title,
             images  = img,

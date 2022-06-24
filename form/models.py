@@ -1545,7 +1545,7 @@ class ConfJevUsers(models.Model):
 #     evid = models.AutoField()
 #     catid = models.IntegerField()
 #     ordering = models.PositiveIntegerField()
-# 
+#
 #     class Meta:
 #         managed = False
 #         db_table = 'conf_jevents_catmap'
