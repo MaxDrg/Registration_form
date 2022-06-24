@@ -4,13 +4,19 @@ from . import models
 
 def form(request: HttpRequest):
     if request.method == "POST":
+        check_title = lambda title: title if not title == 'Choose a value' else ''
         check_others = lambda current, other: request.POST[other] if current == 'other' else current
         check_checkbox = lambda check, file: request.POST[file] if not check == 'none' else None
         check_file = lambda check, data_name: request.FILES[data_name] if not check == 'none' else None
         check_image = lambda check, data_name: request.FILES[data_name] if check == '1' else None
-        check_access = lambda image: 1 if image else 0
+        check_access = lambda abstract, cv, image: 1 if abstract and cv and image  else 0
 
-        print(check_others(request.POST['form4title[]'], 'form4title-other'),)
+        academic_title = check_title(request.POST['form4title[]'])
+
+        print(request.POST['form4title[]'])
+        print(academic_title+ '\n\n\n')
+
+        print(academic_title)
         print(request.POST['form4given-name'],)
         print(request.POST['form4family-name'],)
         print(request.POST['form4gender[]'],)
@@ -28,16 +34,18 @@ def form(request: HttpRequest):
         print(check_file(request.POST['form4presentation-upload-option'], 'form4presentation-upload'),)
         print(check_image(request.POST.get('form4announce'), 'form4portrait-upload'))
 
-        title = f"{check_others(request.POST['form4title[]'], 'form4title-other')} {request.POST['form4given-name']} {request.POST['form4family-name']}"
-
+        title = f"{request.POST['form4given-name']} {request.POST['form4family-name']}"
+        if academic_title:
+            title = f"{academic_title} {request.POST['form4given-name']} {request.POST['form4family-name']}"
+            
         print(title)
     
-        # abstract = check_checkbox(request.POST['form4abstract-enter'], 'form4abstract')
-        # cv = check_checkbox(request.POST['form4short-cv-enter'], 'form4short-cv')
+        abstract = check_checkbox(request.POST['form4abstract-enter'], 'form4abstract')
+        cv = check_checkbox(request.POST['form4short-cv-enter'], 'form4short-cv')
         image = check_image(request.POST.get('form4announce'), 'form4portrait-upload')
 
         data = models.Content(
-            academic_title      = check_others(request.POST['form4title[]'], 'form4title-other'),
+            academic_title      = academic_title,
             given_name          = request.POST['form4given-name'],
             family_name         = request.POST['form4family-name'],
             gender              = request.POST['form4gender[]'],
@@ -57,15 +65,23 @@ def form(request: HttpRequest):
         )
         data.save()
 
-        url = f'http://h2976860.stratoserver.net{data.portrait.url}'
-        img = '{"image_intro":"' + url + '","float_intro":"","image_intro_alt":"' + title \
-            + '","image_intro_caption":"","image_fulltext":"' + url + '","float_fulltext":"","image_fulltext_alt":"' \
-            + title + '","image_fulltext_caption":""}'
+        img = None
+        print(data.portrait)
+
+        if data.portrait:
+            url = f'http://h2976860.stratoserver.net{data.portrait.url}'
+            img = '{"image_intro":"' + url + '","float_intro":"","image_intro_alt":"' + title \
+                + '","image_intro_caption":"","image_fulltext":"' + url + '","float_fulltext":"","image_fulltext_alt":"' \
+                + title + '","image_fulltext_caption":""}'
+
+        access = check_access(abstract, cv, image)
+
+        print(f'access = {access}')
 
         models.ConfContent(
             title   = title,
             images  = img,
-            access  = check_access(image)
+            access  = access
         ).save()
         
         return render(request, 'thank.html')
