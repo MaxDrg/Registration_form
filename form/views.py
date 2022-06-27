@@ -84,7 +84,8 @@ def form(request: HttpRequest):
             title   = title,
             images  = img,
             access  = access
-        ).save()
+        )
+        data.save()
 
         for tag in request.POST.getlist('form4profession[]'):
             models.ConfContentitemTagMap(
