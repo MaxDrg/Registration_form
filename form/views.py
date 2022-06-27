@@ -1,5 +1,6 @@
 from distutils import core
 from hashlib import new
+from operator import ne
 from django.http import HttpRequest
 from django.shortcuts import render
 from . import models
@@ -98,7 +99,8 @@ def form(request: HttpRequest):
                 title = tag,
                 path = low_tag,
                 alias = low_tag
-            ).save()
+            )
+            new_tag.save()
             tags.append(new_tag.id)
 
         for tag in tags:
