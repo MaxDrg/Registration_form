@@ -1,4 +1,5 @@
 from distutils import core
+from hashlib import new
 from django.http import HttpRequest
 from django.shortcuts import render
 from . import models
@@ -86,21 +87,21 @@ def form(request: HttpRequest):
 
         print(request.POST.get('form4other-profession').split('|'))
 
-        other_tags = request.POST.get('form4other-profession').split('|')
         tags = request.POST.getlist('form4profession[]')
 
-        for tag in other_tags:
+        for tag in request.POST.get('form4other-profession').split('|'):
             low_tag = tag.replace(' ', '-').lower()
             last_rgt = models.ConfTags.objects.latest('rgt').rgt + 1
-            models.ConfTags(
+            new_tag = models.ConfTags(
                 lft = last_rgt,
                 rgt = last_rgt + 1,
                 title = tag,
                 path = low_tag,
                 alias = low_tag
             ).save()
+            tags.append(new_tag.id)
 
-        for tag in tags + other_tags:
+        for tag in tags:
             models.ConfContentitemTagMap(
                 core_content_id = core_id,
                 content_item_id = data.id,
