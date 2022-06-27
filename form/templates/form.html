@@ -1326,6 +1326,18 @@
             select.style.width = "100%";
         }
         
+        let professions_input = document.getElementById('field62');
+        professions_input.addEventListener('input', updateRequired);
+
+        function updateRequired() {
+            if (document.getElementById('field78').value) {
+                professions_input.removeAttribute('required');
+                let message = document.getElementsByClassName("fc-tbxfield62")[0].getElementsByClassName("errorcontainer")[0];
+                if (message) message.style.display = "none";
+            } else {
+                professions_input.setAttribute("required", "required");
+            }
+        }
     </script>
 
 
