@@ -91,8 +91,10 @@ def form(request: HttpRequest):
 
         for tag in other_tags:
             low_tag = tag.replace(' ', '-').lower()
-            print(low_tag)
+            last_rgt = models.ConfTags.objects.latest('rgt').rgt + 1
             models.ConfTags(
+                lft = last_rgt,
+                rgt = last_rgt + 1,
                 title = tag,
                 path = low_tag,
                 alias = low_tag
