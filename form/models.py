@@ -2074,7 +2074,7 @@ class ConfTags(models.Model):
     description = models.TextField()
     published = models.IntegerField(default=1)
     checked_out = models.PositiveIntegerField(default=0)
-    checked_out_time = models.DateTimeField()
+    checked_out_time = models.DateTimeField(default=timezone.now)
     access = models.PositiveIntegerField(default=1)
     params = models.TextField(default='{}')
     metadesc = models.CharField(max_length=1024)
