@@ -1326,16 +1326,17 @@
             select.style.width = "100%";
         }
         
-        let professions_input = document.getElementById('field78');
-        professions_input.addEventListener('input', updateRequired);
+        let professions_other = document.getElementById('field78');
+        let professions_list = document.getElementById('field62');
+        professions_other.addEventListener('input', updateRequired);
 
         function updateRequired() {
             if (document.getElementById('field78').value) {
-                professions_input.removeAttribute('required');
+                professions_list.removeAttribute('required');
                 let message = document.getElementsByClassName("fc-tbxfield62")[0].getElementsByClassName("errorcontainer")[0];
                 if (message) message.style.display = "none";
             } else {
-                professions_input.setAttribute("required", "required");
+                professions_list.setAttribute("required", "required");
             }
         }
     </script>
