@@ -16,7 +16,6 @@ def form(request: HttpRequest):
 
         print(request.POST['form4title[]'])
         print(academic_title+ '\n\n\n')
-
         print(academic_title)
         print(request.POST['form4given-name'],)
         print(request.POST['form4family-name'],)
@@ -38,8 +37,6 @@ def form(request: HttpRequest):
         title = f"{request.POST['form4given-name']} {request.POST['form4family-name']}"
         if academic_title:
             title = f"{academic_title} {request.POST['form4given-name']} {request.POST['form4family-name']}"
-            
-        print(title)
     
         abstract = check_checkbox(request.POST['form4abstract-enter'], 'form4abstract')
         cv = check_checkbox(request.POST['form4short-cv-enter'], 'form4short-cv')
@@ -87,14 +84,26 @@ def form(request: HttpRequest):
         )
         data.save()
 
-        for tag in request.POST.getlist('form4profession[]'):
+        print(request.POST.get('form4other-profession').split('|'))
+
+        other_tags = request.POST.get('form4other-profession').split('|')
+        tags = request.POST.getlist('form4profession[]')
+
+        for tag in other_tags:
+            low_tag = tag.replace(' ', '-').lower()
+            print(low_tag)
+            models.ConfTags(
+                title = tag,
+                path = low_tag,
+                alias = low_tag
+            ).save()
+
+        for tag in tags + other_tags:
             models.ConfContentitemTagMap(
                 core_content_id = core_id,
                 content_item_id = data.id,
                 tag_id = tag
             ).save()
-
-        
         
         return render(request, 'thank.html')
 
