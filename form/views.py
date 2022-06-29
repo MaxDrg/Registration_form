@@ -19,7 +19,7 @@ def form(request: HttpRequest):
 
         print(request.POST.get('form4abstract'))
         print(request.POST.get('form4short-cv'))
-        print(request.POST.get('form4portrait-upload'))
+        print(f'"{request.POST.get("form4portrait-upload")}"')
     
         abstract = check_checkbox(request.POST['form4abstract-enter'], 'form4abstract')
         cv = check_checkbox(request.POST['form4short-cv-enter'], 'form4short-cv')
