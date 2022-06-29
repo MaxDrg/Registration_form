@@ -53,6 +53,9 @@ def form(request: HttpRequest):
                 + '","image_intro_caption":"","image_fulltext":"' + url + '","float_fulltext":"","image_fulltext_alt":"' \
                 + title + '","image_fulltext_caption":""}'
 
+        print(abstract)
+        print(cv)
+        print(announce)
         access = check_access(abstract, cv, announce)
 
         core_id = models.ConfContentitemTagMap.objects.latest('core_content_id').core_content_id + 1
