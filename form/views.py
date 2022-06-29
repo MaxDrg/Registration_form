@@ -7,8 +7,8 @@ def form(request: HttpRequest):
         check_title = lambda title: title if not title == 'Choose a value' else ''
         check_others = lambda current, other: request.POST[other] if current == 'other' else current
         check_checkbox = lambda check, file: request.POST[file] if not check == 'none' else None
-        check_file = lambda check, data_name: request.FILES[data_name] if not check == 'none' and request.POST.get(data_name) else None
-        check_image = lambda check, data_name: request.FILES[data_name] if check == '1' and request.POST.get(data_name) else None
+        check_file = lambda check, data_name: request.FILES[data_name] if not check == 'none' and not request.POST.get(data_name) == '' else None
+        check_image = lambda check, data_name: request.FILES[data_name] if check == '1' and not request.POST.get(data_name) =='' else None
         check_access = lambda abstract, cv, image: 1 if abstract and cv and image else 0
 
         academic_title = check_title(request.POST['form4title[]'])
