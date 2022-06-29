@@ -58,6 +58,8 @@ def form(request: HttpRequest):
         print(announce)
         access = check_access(abstract, cv, announce)
 
+        print(f'access = {access}')
+
         core_id = models.ConfContentitemTagMap.objects.latest('core_content_id').core_content_id + 1
 
         data = models.ConfContent(
