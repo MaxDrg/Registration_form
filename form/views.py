@@ -9,7 +9,7 @@ def form(request: HttpRequest):
         check_checkbox = lambda check, file: request.POST[file] if not check == 'none' else None
         check_file = lambda check, data_name: request.FILES[data_name] if not check == 'none' and not request.POST.get(data_name) == '' else None
         check_image = lambda check, data_name: request.FILES[data_name] if check == '1' and not request.POST.get(data_name) == '' else None
-        check_access = lambda abstract, cv, check: 1 if abstract and cv and image and check == '1' else 0
+        check_access = lambda abstract, cv, check: 1 if abstract and cv and check == '1' else 0
 
         academic_title = check_title(request.POST['form4title[]'])
 
