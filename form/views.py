@@ -8,8 +8,8 @@ def form(request: HttpRequest):
         check_others = lambda current, other: request.POST[other] if current == 'other' else current
         check_checkbox = lambda check, file: request.POST[file] if not check == 'none' else None
         check_file = lambda check, data_name: request.FILES[data_name] if not check == 'none' and not request.POST.get(data_name) == '' else None
-        check_image = lambda check, data_name: request.FILES[data_name] if check == '1' and not request.POST.get(data_name) =='' else None
-        check_access = lambda abstract, cv, image: 1 if abstract and cv and image else 0
+        check_image = lambda check, data_name: request.FILES[data_name] if check == '1' and not request.POST.get(data_name) == '' else None
+        check_access = lambda abstract, cv, check: 1 if abstract and cv and image and check == '1' else 0
 
         academic_title = check_title(request.POST['form4title[]'])
 
@@ -17,13 +17,10 @@ def form(request: HttpRequest):
         if academic_title:
             title = f"{academic_title} {request.POST['form4given-name']} {request.POST['form4family-name']}"
 
-        print(request.POST.get('form4abstract'))
-        print(request.POST.get('form4short-cv'))
-        print(f'"{request.POST.get("form4portrait-upload")}"')
-    
+        announce = request.POST.get('form4announce')
         abstract = check_checkbox(request.POST['form4abstract-enter'], 'form4abstract')
         cv = check_checkbox(request.POST['form4short-cv-enter'], 'form4short-cv')
-        image = check_image(request.POST.get('form4announce'), 'form4portrait-upload')
+        image = check_image(announce, 'form4portrait-upload')
 
         data = models.Content(
             academic_title      = academic_title,
@@ -56,7 +53,7 @@ def form(request: HttpRequest):
                 + '","image_intro_caption":"","image_fulltext":"' + url + '","float_fulltext":"","image_fulltext_alt":"' \
                 + title + '","image_fulltext_caption":""}'
 
-        access = check_access(abstract, cv, image)
+        access = check_access(abstract, cv, announce)
 
         core_id = models.ConfContentitemTagMap.objects.latest('core_content_id').core_content_id + 1
 
