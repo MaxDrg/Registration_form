@@ -1,3 +1,4 @@
+import re
 from django.http import HttpRequest
 from django.shortcuts import render
 from . import models
@@ -53,12 +54,7 @@ def form(request: HttpRequest):
                 + '","image_intro_caption":"","image_fulltext":"' + url + '","float_fulltext":"","image_fulltext_alt":"' \
                 + title + '","image_fulltext_caption":""}'
 
-        print(abstract)
-        print(cv)
-        print(announce)
         access = check_access(abstract, cv, announce)
-
-        print(f'access = {access}')
 
         core_id = models.ConfContentitemTagMap.objects.latest('core_content_id').core_content_id + 1
 
@@ -74,15 +70,16 @@ def form(request: HttpRequest):
         tags = request.POST.getlist('form4profession[]')
 
         for tag in request.POST.get('form4other-profession').split('|'):
-            low_tag = tag.replace(' ', '-').lower()
-            last_rgt = models.ConfTags.objects.latest('rgt').rgt + 1
-            new_tag = models.ConfTags(
-                lft = last_rgt,
-                rgt = last_rgt + 1,
-                title = tag,
-                path = low_tag,
-                alias = low_tag
-            )
+            if models.ConfTags.objects.filter(title=tag).exists():
+                low_tag = tag.replace(' ', '-').lower()
+                last_rgt = models.ConfTags.objects.latest('rgt').rgt + 1
+                new_tag = models.ConfTags(
+                    lft = last_rgt,
+                    rgt = last_rgt + 1,
+                    title = tag,
+                    path = low_tag,
+                    alias = low_tag
+                )
             new_tag.save()
             tags.append(new_tag.id)
 

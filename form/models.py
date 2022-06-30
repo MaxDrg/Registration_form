@@ -2088,7 +2088,7 @@ class ConfTags(models.Model):
     images = models.TextField(default='{}')
     urls = models.TextField(default='{}')
     hits = models.PositiveIntegerField(default=0)
-    language = models.CharField(max_length=7)
+    language = models.CharField(max_length=7, default='*')
     version = models.PositiveIntegerField(default=1)
     publish_up = models.DateTimeField(default=timezone.now)
     publish_down = models.DateTimeField(default=timezone.now)
