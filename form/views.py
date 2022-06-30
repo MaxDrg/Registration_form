@@ -1,4 +1,3 @@
-import re
 from django.http import HttpRequest
 from django.shortcuts import render
 from . import models
@@ -70,21 +69,24 @@ def form(request: HttpRequest):
         tags = request.POST.getlist('form4profession[]')
 
         for tag in request.POST.get('form4other-profession').split('|'):
-            new_tag = models.ConfTags.objects.filter(title=tag).exists()
-            if not new_tag:
-                low_tag = tag.replace(' ', '-').lower()
-                last_rgt = models.ConfTags.objects.latest('rgt').rgt + 1
-                new_tag = models.ConfTags(
-                    lft = last_rgt,
-                    rgt = last_rgt + 1,
-                    title = tag,
-                    path = low_tag,
-                    alias = low_tag
-                )
-            else: 
-                new_tag = models.ConfTags.objects.filter(title=tag)[0]
-            new_tag.save()
-            tags.append(new_tag.id)
+            if not tag == '':
+                new_tag = models.ConfTags.objects.filter(title=tag).exists()
+                if not new_tag:
+                    low_tag = tag.replace(' ', '-').lower()
+                    last_rgt = models.ConfTags.objects.latest('rgt').rgt + 1
+                    new_tag = models.ConfTags(
+                        lft = last_rgt,
+                        rgt = last_rgt + 1,
+                        title = tag,
+                        path = low_tag,
+                        alias = low_tag
+                    )
+                else: 
+                    new_tag = models.ConfTags.objects.filter(title=tag)[0]
+                new_tag.save()
+                tags.append(new_tag.id)
+            else:
+                print('hi')
 
         for tag in tags:
             models.ConfContentitemTagMap(
