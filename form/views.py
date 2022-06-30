@@ -70,7 +70,8 @@ def form(request: HttpRequest):
         tags = request.POST.getlist('form4profession[]')
 
         for tag in request.POST.get('form4other-profession').split('|'):
-            if models.ConfTags.objects.filter(title=tag).exists():
+            new_tag = models.ConfTags.objects.filter(title=tag).exists()
+            if not new_tag:
                 low_tag = tag.replace(' ', '-').lower()
                 last_rgt = models.ConfTags.objects.latest('rgt').rgt + 1
                 new_tag = models.ConfTags(
@@ -80,6 +81,8 @@ def form(request: HttpRequest):
                     path = low_tag,
                     alias = low_tag
                 )
+            else: 
+                new_tag = models.ConfTags.objects.filter(title=tag)[0]
             new_tag.save()
             tags.append(new_tag.id)
 
