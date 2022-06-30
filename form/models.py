@@ -268,7 +268,7 @@ class ConfContent(models.Model):
     hits = models.PositiveIntegerField(default='0')
     metadata = models.TextField(default=0)
     featured = models.PositiveIntegerField(default=0)
-    language = models.CharField(max_length=7)
+    language = models.CharField(max_length=7, default='*')
     xreference = models.CharField(max_length=50)
     note = models.CharField(max_length=255)
 
