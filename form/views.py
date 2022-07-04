@@ -23,6 +23,7 @@ def form(request: HttpRequest):
         image = check_image(announce, 'form4portrait-upload')
 
         print(f"[{request.POST.get('form4portrait-upload')}]")
+        print(f'file = {request.FILES.get("form4portrait-upload")}')
         print(image)
 
         data = models.Content(
