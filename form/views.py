@@ -100,9 +100,9 @@ def form(request: HttpRequest):
                 tag_id = tag
             ).save()
         
-        return render(request, 'thank.html'), {
+        return render(request, 'thank.html', {
             'title': title
-        }
+        })
 
     return render(request, 'form.html', 
         {
