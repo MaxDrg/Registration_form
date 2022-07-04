@@ -41,8 +41,8 @@ def form(request: HttpRequest):
             university          = post['form4university'],
             type_participation  = post['form4participation-type'],
             presentation_title  = post['form4presentation-title'],
-            abstract            = (lambda abs: abstract if abs else '""')(abstract),
-            short_cv            = (lambda cv: cv if cv else '""')(cv),
+            abstract            = abstract,
+            short_cv            = cv,
             presentation_upload = check_file(post['form4presentation-upload-option'], 'form4presentation-upload'),
             portrait            = image
         )
@@ -64,8 +64,8 @@ def form(request: HttpRequest):
 
         data = models.ConfContent(
             title       = title,
-            introtext   = abstract,
-            fulltext    = cv,
+            introtext   = (lambda abs: abstract if abs else '""')(abstract),
+            fulltext    = (lambda cv: cv if cv else '""')(cv),
             images      = img,
             access      = access
         )
