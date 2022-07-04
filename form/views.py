@@ -9,12 +9,12 @@ def form(request: HttpRequest):
         post: QueryDict = request.POST
         files: MultiValueDict = request.FILES
 
-        check_title = lambda title: title if not title == 'Choose a value' else ''
-        check_others = lambda current, other: post[other] if current == 'other' else current
-        check_checkbox = lambda check, file: post[file] if not check == 'none' else None
-        check_file = lambda check, data_name: files[data_name] if not check == 'none' and file_exist(files, data_name) else None
-        check_image = lambda check, data_name: files[data_name] if check == '1' and file_exist(files, data_name) else None
-        check_access = lambda abstract, cv, check: 1 if abstract and cv and check == '1' else 0
+        check_title     = lambda title: title if not title == 'Choose a value' else ''
+        check_others    = lambda current, other: post[other] if current == 'other' else current
+        check_checkbox  = lambda check, file: post[file] if not check == 'none' else None
+        check_file      = lambda check, data_name: files[data_name] if not check == 'none' and file_exist(files, data_name) else None
+        check_image     = lambda check, data_name: files[data_name] if check == '1' and file_exist(files, data_name) else None
+        check_access    = lambda abstract, cv, check: 1 if abstract and cv and check == '1' else 0
 
         academic_title = check_title(post['form4title[]'])
 
@@ -22,10 +22,10 @@ def form(request: HttpRequest):
         if academic_title:
             title = f"{academic_title} {post['form4given-name']} {post['form4family-name']}"
 
-        announce = post.get('form4announce')
-        abstract = check_checkbox(post['form4abstract-enter'], 'form4abstract')
-        cv = check_checkbox(post['form4short-cv-enter'], 'form4short-cv')
-        image = check_image(announce, 'form4portrait-upload')
+        announce    = post.get('form4announce')
+        abstract    = check_checkbox(post['form4abstract-enter'], 'form4abstract')
+        cv          = check_checkbox(post['form4short-cv-enter'], 'form4short-cv')
+        image       = check_image(announce, 'form4portrait-upload')
 
         data = models.Content(
             academic_title      = academic_title,
@@ -63,11 +63,11 @@ def form(request: HttpRequest):
         core_id = models.ConfContentitemTagMap.objects.latest('core_content_id').core_content_id + 1
 
         data = models.ConfContent(
-            title   = title,
-            introtext = abstract,
-            fulltext = cv,
-            images  = img,
-            access  = access
+            title       = title,
+            introtext   = abstract,
+            fulltext    = cv,
+            images      = img,
+            access      = access
         )
         data.save()
 
@@ -77,14 +77,14 @@ def form(request: HttpRequest):
             if tag:
                 new_tag = models.ConfTags.objects.filter(title=tag).exists()
                 if not new_tag:
-                    low_tag = tag.replace(' ', '-').lower()
+                    low_tag  = tag.replace(' ', '-').lower()
                     last_rgt = models.ConfTags.objects.latest('rgt').rgt + 1
-                    new_tag = models.ConfTags(
-                        lft = last_rgt,
-                        rgt = last_rgt + 1,
-                        title = tag,
-                        path = low_tag,
-                        alias = low_tag
+                    new_tag  = models.ConfTags(
+                        lft     = last_rgt,
+                        rgt     = last_rgt + 1,
+                        title   = tag,
+                        path    = low_tag,
+                        alias   = low_tag
                     )
                     new_tag.save()
                 else: 
@@ -95,16 +95,19 @@ def form(request: HttpRequest):
             models.ConfContentitemTagMap(
                 core_content_id = core_id,
                 content_item_id = data.id,
-                tag_id = tag
+                tag_id          = tag
             ).save()
+
+        text = 'But you need to add abstract and short CV to display you on the website.'
         
         return render(request, 'thank.html', {
-            'title': title
+            'title': title,
         })
 
     return render(request, 'form.html', 
         {
-            'professions': models.ConfTags.objects.all()
+            'professions': models.ConfTags.objects.all(),
+            'additional': lambda abstract, cv: (None if abstract and cv else text)(abstract, cv)
         })
 
 def file_exist(files: MultiValueDict, key: str):

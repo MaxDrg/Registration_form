@@ -236,6 +236,9 @@
                                             <div class="span12">
                                                 <div class="item-page">
                                                     <p>Dear {{ title }}</p>
+                                                    {% if additional %}
+                                                        <p>{{ additional }}</p>
+                                                    {% endif %}
                                                     <p>Your registration for the Chance for Science Conference 2022 was
                                                         successful.</p>
                                                 </div>
