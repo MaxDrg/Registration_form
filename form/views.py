@@ -98,16 +98,20 @@ def form(request: HttpRequest):
                 tag_id          = tag
             ).save()
 
-        text = 'But you need to add abstract and short CV to display you on the website.'
+        alert = ''
+
+        if announce:
+            if not abstract or not cv:
+                alert = 'But you need to add abstract and short CV to display you on the website.'
         
         return render(request, 'thank.html', {
             'title': title,
+            'additional': alert
         })
 
     return render(request, 'form.html', 
         {
-            'professions': models.ConfTags.objects.all(),
-            'additional': lambda abstract, cv: (None if abstract and cv else text)(abstract, cv)
+            'professions': models.ConfTags.objects.all()
         })
 
 def file_exist(files: MultiValueDict, key: str):
