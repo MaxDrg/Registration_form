@@ -74,7 +74,7 @@ def form(request: HttpRequest):
         tags = post.getlist('form4profession[]')
 
         for tag in post.get('form4other-profession').split('|'):
-            if not tag:
+            if tag:
                 print(bool(tag))
                 print('test')
                 new_tag = models.ConfTags.objects.filter(title=tag).exists()
