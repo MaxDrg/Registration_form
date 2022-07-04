@@ -11,6 +11,9 @@ def form(request: HttpRequest):
         check_image = lambda check, data_name: request.FILES[data_name] if check == '1' and request.FILES[data_name] else None
         check_access = lambda abstract, cv, check: 1 if abstract and cv and check == '1' else 0
 
+        print(f"file = {request.FILES['form4presentation-upload']}")
+        print(f"image = {request.FILES['form4portrait-upload']}")
+
         academic_title = check_title(request.POST['form4title[]'])
 
         title = f"{request.POST['form4given-name']} {request.POST['form4family-name']}"
@@ -21,9 +24,6 @@ def form(request: HttpRequest):
         abstract = check_checkbox(request.POST['form4abstract-enter'], 'form4abstract')
         cv = check_checkbox(request.POST['form4short-cv-enter'], 'form4short-cv')
         image = check_image(announce, 'form4portrait-upload')
-
-        print(f'file = {request.FILES.get("form4portrait-upload")}')
-        print(image)
 
         data = models.Content(
             academic_title      = academic_title,
