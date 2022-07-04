@@ -7,8 +7,8 @@ def form(request: HttpRequest):
         check_title = lambda title: title if not title == 'Choose a value' else ''
         check_others = lambda current, other: request.POST[other] if current == 'other' else current
         check_checkbox = lambda check, file: request.POST[file] if not check == 'none' else None
-        check_file = lambda check, data_name: request.FILES[data_name] if not check == 'none' and not request.POST.get(data_name) == '' else None
-        check_image = lambda check, data_name: request.FILES[data_name] if check == '1' and not request.POST.get(data_name) == '' else None
+        check_file = lambda check, data_name: request.FILES[data_name] if not check == 'none' and request.FILES[data_name] else None
+        check_image = lambda check, data_name: request.FILES[data_name] if check == '1' and request.FILES[data_name] else None
         check_access = lambda abstract, cv, check: 1 if abstract and cv and check == '1' else 0
 
         academic_title = check_title(request.POST['form4title[]'])
@@ -22,7 +22,6 @@ def form(request: HttpRequest):
         cv = check_checkbox(request.POST['form4short-cv-enter'], 'form4short-cv')
         image = check_image(announce, 'form4portrait-upload')
 
-        print(f"[{request.POST.get('form4portrait-upload')}]")
         print(f'file = {request.FILES.get("form4portrait-upload")}')
         print(image)
 
@@ -99,7 +98,9 @@ def form(request: HttpRequest):
                 tag_id = tag
             ).save()
         
-        return render(request, 'thank.html')
+        return render(request, 'thank.html'), {
+            'title': title
+        }
 
     return render(request, 'form.html', 
         {
