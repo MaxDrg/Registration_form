@@ -22,6 +22,9 @@ def form(request: HttpRequest):
         cv = check_checkbox(request.POST['form4short-cv-enter'], 'form4short-cv')
         image = check_image(announce, 'form4portrait-upload')
 
+        print(f"[{request.POST.get('form4portrait-upload')}]")
+        print(image)
+
         data = models.Content(
             academic_title      = academic_title,
             given_name          = request.POST['form4given-name'],
@@ -86,7 +89,7 @@ def form(request: HttpRequest):
                 new_tag.save()
                 tags.append(new_tag.id)
             else:
-                print('hi')
+                print('test')
 
         for tag in tags:
             models.ConfContentitemTagMap(
