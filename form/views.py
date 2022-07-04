@@ -88,12 +88,14 @@ def form(request: HttpRequest):
                         path = low_tag,
                         alias = low_tag
                     )
+                    new_tag.save()
                 else: 
                     new_tag = models.ConfTags.objects.filter(title=tag)[0]
-                new_tag.save()
                 tags.append(new_tag.id)
             else:
                 print(bool(tag))
+
+            print(tags)
 
         for tag in tags:
             models.ConfContentitemTagMap(
