@@ -75,8 +75,6 @@ def form(request: HttpRequest):
 
         for tag in post.get('form4other-profession').split('|'):
             if tag:
-                print(bool(tag))
-                print('test')
                 new_tag = models.ConfTags.objects.filter(title=tag).exists()
                 if not new_tag:
                     low_tag = tag.replace(' ', '-').lower()
@@ -92,10 +90,6 @@ def form(request: HttpRequest):
                 else: 
                     new_tag = models.ConfTags.objects.filter(title=tag)[0]
                 tags.append(new_tag.id)
-            else:
-                print(bool(tag))
-
-            print(tags)
 
         for tag in tags:
             models.ConfContentitemTagMap(
