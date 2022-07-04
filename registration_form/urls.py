@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('registration/', include('form.urls')),
+    path('', include('form.urls')),
 ]
 
 if settings.DEBUG:
