@@ -109,7 +109,7 @@ def form(request: HttpRequest):
             'additional': alert
         })
 
-    return render(request, 'form.html', 
+    return render(request, 'form1.html', 
         {
             'professions': models.ConfTags.objects.all()
         })
