@@ -1,18 +1,18 @@
 version: "3.0"
  
 services:
-  #web:
-  #  image: registration_form:1.0.1
-  #  build: .
-  #  command: gunicorn registration_form.wsgi:application --bind 0.0.0.0:8000
-  #  volumes:
-  #    - .:/registration_form
-  #    - static:/staticfiles/
-  #    - media:/mediafiles/
-  #  expose:
-  #    - 8000
-  #  env_file:
-  #  - ./.env.dev
+  web:
+    image: registration_form:1.0.1
+    build: .
+    command: gunicorn registration_form.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/registration_form
+      - static:/staticfiles/
+      - media:/mediafiles/
+    expose:
+      - 8000
+    env_file:
+    - ./.env.dev
   nginx:
     build: ./nginx
     restart: always
@@ -20,12 +20,12 @@ services:
       - 80:80
       - 443:443
     volumes:
-      #- static:/staticfiles/
-      #- media:/mediafiles/
+      - static:/staticfiles/
+      - media:/mediafiles/
       - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
-    #depends_on:
-    #  - web
+    depends_on:
+      - web
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
   certbot:
     image: certbot/certbot
@@ -34,6 +34,6 @@ services:
       - ./data/certbot/www:/var/www/certbot
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
-#volumes:
-#  static:
-#  media:
+volumes:
+  static:
+  media:
