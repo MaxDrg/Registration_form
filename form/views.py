@@ -114,7 +114,9 @@ def form(request: HttpRequest):
         #         tags.append(new_tag.id)
 
         for tag in tags:
+            print(tag)
             tag = models.ConfTags.objects.filter(title=tag)[0].id
+            print(tag)
             models.ConfContentitemTagMap(
                 core_content_id = core_id,
                 content_item_id = data.id,
