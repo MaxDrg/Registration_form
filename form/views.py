@@ -18,16 +18,29 @@ def form(request: HttpRequest):
 
         academic_title = check_title(post['form4title[]'])
 
-        print(post.get('form4profession[]'))
+        print(f'hi = {post.get("form4profession[]")}')
+        print(post.get('form4session-lead'))
 
         title = f"{post['form4given-name']} {post['form4family-name']}"
         if academic_title:
             title = f"{academic_title} {post['form4given-name']} {post['form4family-name']}"
 
-        announce    = post.get('form4announce')
-        abstract    = check_checkbox(post['form4abstract-enter'], 'form4abstract')
-        cv          = check_checkbox(post['form4short-cv-enter'], 'form4short-cv')
-        image       = check_image(announce, 'form4portrait-upload')
+        particip    = post['form4participation-type']
+        sess_lead   = None
+        announce    = None
+        abstract    = None
+        cv          = None
+        image       = None
+        social_med  = None
+        
+        if particip == 'listen':
+            sess_lead   = post.get('form4session-lead')
+        else:
+            announce    = post.get('form4announce')
+            abstract    = check_checkbox(post['form4abstract-enter'], 'form4abstract')
+            cv          = check_checkbox(post['form4short-cv-enter'], 'form4short-cv')
+            image       = check_image(announce, 'form4portrait-upload')
+            social_med  = post.get('form4social-media')
 
         data = models.Content(
             academic_title      = academic_title,
