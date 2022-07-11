@@ -18,6 +18,8 @@ def form(request: HttpRequest):
 
         academic_title = check_title(post['form4title[]'])
 
+        print(post.get('form4profession[]'))
+
         title = f"{post['form4given-name']} {post['form4family-name']}"
         if academic_title:
             title = f"{academic_title} {post['form4given-name']} {post['form4family-name']}"

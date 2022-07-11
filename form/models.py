@@ -2909,6 +2909,7 @@ class Content(models.Model):
     country_origin      = models.CharField("Country origin", max_length=255)
     current_location    = models.CharField("Current location", max_length=255)
     profession          = models.CharField("Profession", max_length=255)
+    profession_other    = models.CharField("Other professions", max_length=500, null=True)
     university          = models.CharField("University", max_length=255)
     type_participation  = models.CharField("Type participation", max_length=255)
     presentation_title  = models.CharField("Presentation title", max_length=255)
