@@ -687,10 +687,10 @@
                                                         <p><strong>The registration for speakers will be closed after
                                                                 August 7, 2022.</strong></p>
                                                     </div>
-                                                    <form action="/index.php/registration?task=visforms.send&amp;id=4"
-                                                        method="post" name="visform" id="visform4"
+                                                    <form method="post" name="visform" id="visform4"
                                                         class="visform bthorizontal  form-horizontal "
                                                         enctype="multipart/form-data" role="form">
+                                                        {% csrf_token %}
                                                         <div class="visprogress"><span class="stepCont"
                                                                 style="width: 50%;"><span
                                                                     class="badge badge-important">Step 1 of
