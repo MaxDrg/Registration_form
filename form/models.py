@@ -5,6 +5,7 @@
 #   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
+from statistics import mode
 from django.utils import timezone
 from django.db import models
 
@@ -2912,11 +2913,13 @@ class Content(models.Model):
     profession_other    = models.CharField("Other professions", max_length=500, null=True)
     university          = models.CharField("University", max_length=255)
     type_participation  = models.CharField("Type participation", max_length=255)
-    presentation_title  = models.CharField("Presentation title", max_length=255)
+    presentation_title  = models.CharField("Presentation title", max_length=255, null=True)
     abstract            = models.TextField("Abstract", null=True)
     short_cv            = models.TextField("Short CV", null=True)
     presentation_upload = models.FileField("Presentation", null=True)
     portrait            = models.FileField("Portrait", null=True)
+    session_lead        = models.IntegerField("Session lead", null=True)
+    social_media        = models.IntegerField("Social media", null=True)
 
     def __str__(self):
         return f'{self.given_name} {self.family_name}'
