@@ -57,7 +57,7 @@ def form(request: HttpRequest):
             country_origin      = check_others(post['form4country-origin[]'], 'form4origin-other'),
             current_location    = check_others(post['form4current-location[]'], 'form4current-location-other'),
             profession          = post.getlist('form4profession[]'),
-            profession_other    = (lambda professions: professions if professions else None)(post['form4profession-other']),
+            profession_other    = (lambda professions: professions if professions else None)(post.get('form4profession-other')),
             university          = post['form4university'],
             type_participation  = particip,
             presentation_title  = presentation_title,
