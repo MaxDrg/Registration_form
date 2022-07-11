@@ -75,7 +75,7 @@ def form(request: HttpRequest):
                 + title + '","image_fulltext_caption":""}'
 
         if data.portrait:
-            url = f'http://h2976860.stratoserver.net{data.portrait.url}'
+            url = f'https://registration.chance-for-science.eu{data.portrait.url}'
             img = '{"image_intro":"' + url + '","float_intro":"","image_intro_alt":"' + title \
                 + '","image_intro_caption":"","image_fulltext":"' + url + '","float_fulltext":"","image_fulltext_alt":"' \
                 + title + '","image_fulltext_caption":""}'
