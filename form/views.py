@@ -109,6 +109,7 @@ def form(request: HttpRequest):
         #         tags.append(new_tag.id)
 
         for tag in tags:
+            if tag == 'other': continue
             new_tag = models.ConfTags.objects.filter(title=tag)
             if not new_tag.exists():
                 low_tag  = tag.replace(' ', '-').lower()
@@ -120,7 +121,6 @@ def form(request: HttpRequest):
                     path    = low_tag,
                     alias   = low_tag
                 )]
-                print(new_tag)
                 new_tag[0].save()
             models.ConfContentitemTagMap(
                 core_content_id = core_id,
