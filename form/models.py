@@ -217,7 +217,6 @@ class ConfaprBanners(models.Model):
 
 
 class ConfaprBreezingforms(models.Model):
-    id = models.IntegerField()
     language = models.CharField(max_length=255)
 
     class Meta:
@@ -513,7 +512,6 @@ class ConfaprDropeditorTemplates(models.Model):
 
 
 class ConfaprDropfiles(models.Model):
-    id = models.IntegerField(unique=True)
     type = models.CharField(max_length=20)
     cloud_id = models.CharField(unique=True, max_length=100, blank=True, null=True)
     path = models.CharField(max_length=200)
@@ -1568,7 +1566,6 @@ class ConfaprFinderTypes(models.Model):
 
 
 class ConfaprHelper(models.Model):
-    id = models.IntegerField(unique=True)
     name = models.CharField(max_length=120)
     type = models.CharField(max_length=120)
 
@@ -3162,7 +3159,6 @@ class ConfsepBanners(models.Model):
 
 
 class ConfsepBreezingforms(models.Model):
-    id = models.IntegerField()
     language = models.CharField(max_length=255)
 
     class Meta:
@@ -3458,7 +3454,6 @@ class ConfsepDropeditorTemplates(models.Model):
 
 
 class ConfsepDropfiles(models.Model):
-    id = models.IntegerField(unique=True)
     type = models.CharField(max_length=20)
     cloud_id = models.CharField(unique=True, max_length=100, blank=True, null=True)
     path = models.CharField(max_length=200)
