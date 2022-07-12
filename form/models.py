@@ -342,6 +342,9 @@ class ConfaprContent(models.Model):
         managed = False
         db_table = 'confapr_content'
 
+    def __str__(self):
+        return self.title
+
 
 class ConfaprContentFrontpage(models.Model):
     content_id = models.IntegerField(primary_key=True)
@@ -6251,3 +6254,6 @@ class Content(models.Model):
     class Meta:
         managed = False
         db_table = 'form_content'
+
+    def __str__(self):
+        return f'{self.given_name} {self.family_name}'
