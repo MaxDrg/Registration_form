@@ -306,12 +306,12 @@ class ConfaprContactDetails(models.Model):
         db_table = 'confapr_contact_details'
 
 
-class ConfaprContent(models.Model):
+class ConfsepContent(models.Model):
     asset_id = models.PositiveIntegerField(default=0)
     title = models.CharField(max_length=255)
     alias = models.CharField(max_length=400)
     introtext = models.TextField(null=True)
-    fulltext = models.TextField(null=True)
+    fulltext = models.TextField(null=True, default='')
     state = models.IntegerField(default=1)
     catid = models.PositiveIntegerField(default=10)
     created = models.DateTimeField(default=timezone.now)
@@ -381,7 +381,7 @@ class ConfaprContentTypes(models.Model):
         db_table = 'confapr_content_types'
 
 
-class ConfaprContentitemTagMap(models.Model):
+class ConfsepContentitemTagMap(models.Model):
     type_alias = models.CharField(max_length=255, default='com_content.article')
     core_content_id = models.PositiveIntegerField()
     content_item_id = models.IntegerField()
@@ -2126,7 +2126,7 @@ class ConfaprSession(models.Model):
         db_table = 'confapr_session'
 
 
-class ConfaprTags(models.Model):
+class ConfsepTags(models.Model):
     parent_id = models.PositiveIntegerField(default=1)
     lft = models.IntegerField()
     rgt = models.IntegerField()
@@ -3250,44 +3250,6 @@ class ConfsepContactDetails(models.Model):
         managed = False
         db_table = 'confsep_contact_details'
 
-
-class ConfsepContent(models.Model):
-    asset_id = models.PositiveIntegerField()
-    title = models.CharField(max_length=255)
-    alias = models.CharField(max_length=400)
-    introtext = models.TextField()
-    fulltext = models.TextField()
-    state = models.IntegerField()
-    catid = models.PositiveIntegerField()
-    created = models.DateTimeField()
-    created_by = models.PositiveIntegerField()
-    created_by_alias = models.CharField(max_length=255)
-    modified = models.DateTimeField()
-    modified_by = models.PositiveIntegerField()
-    checked_out = models.PositiveIntegerField()
-    checked_out_time = models.DateTimeField()
-    publish_up = models.DateTimeField()
-    publish_down = models.DateTimeField()
-    images = models.TextField()
-    urls = models.TextField()
-    attribs = models.CharField(max_length=5120)
-    version = models.PositiveIntegerField()
-    ordering = models.IntegerField()
-    metakey = models.TextField()
-    metadesc = models.TextField()
-    access = models.PositiveIntegerField()
-    hits = models.PositiveIntegerField()
-    metadata = models.TextField()
-    featured = models.PositiveIntegerField()
-    language = models.CharField(max_length=7)
-    xreference = models.CharField(max_length=50)
-    note = models.CharField(max_length=255)
-
-    class Meta:
-        managed = False
-        db_table = 'confsep_content'
-
-
 class ConfsepContentFrontpage(models.Model):
     content_id = models.IntegerField(primary_key=True)
     ordering = models.IntegerField()
@@ -3321,21 +3283,6 @@ class ConfsepContentTypes(models.Model):
     class Meta:
         managed = False
         db_table = 'confsep_content_types'
-
-
-class ConfsepContentitemTagMap(models.Model):
-    type_alias = models.CharField(max_length=255)
-    core_content_id = models.PositiveIntegerField()
-    content_item_id = models.IntegerField()
-    tag_id = models.PositiveIntegerField()
-    tag_date = models.DateTimeField()
-    type_id = models.IntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'confsep_contentitem_tag_map'
-        unique_together = (('content_item_id', 'tag_id', 'type_id'),)
-
 
 class ConfsepCoreLogSearches(models.Model):
     search_term = models.CharField(max_length=128)
@@ -5185,43 +5132,6 @@ class ConfsepSession(models.Model):
     class Meta:
         managed = False
         db_table = 'confsep_session'
-
-
-class ConfsepTags(models.Model):
-    parent_id = models.PositiveIntegerField()
-    lft = models.IntegerField()
-    rgt = models.IntegerField()
-    level = models.PositiveIntegerField()
-    path = models.CharField(max_length=400)
-    title = models.CharField(max_length=255)
-    alias = models.CharField(max_length=400)
-    note = models.CharField(max_length=255)
-    description = models.TextField()
-    published = models.IntegerField()
-    checked_out = models.PositiveIntegerField()
-    checked_out_time = models.DateTimeField()
-    access = models.PositiveIntegerField()
-    params = models.TextField()
-    metadesc = models.CharField(max_length=1024)
-    metakey = models.CharField(max_length=1024)
-    metadata = models.CharField(max_length=2048)
-    created_user_id = models.PositiveIntegerField()
-    created_time = models.DateTimeField()
-    created_by_alias = models.CharField(max_length=255)
-    modified_user_id = models.PositiveIntegerField()
-    modified_time = models.DateTimeField()
-    images = models.TextField()
-    urls = models.TextField()
-    hits = models.PositiveIntegerField()
-    language = models.CharField(max_length=7)
-    version = models.PositiveIntegerField()
-    publish_up = models.DateTimeField()
-    publish_down = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'confsep_tags'
-
 
 class ConfsepTemplateStyles(models.Model):
     template = models.CharField(max_length=50)

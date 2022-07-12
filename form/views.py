@@ -1,3 +1,4 @@
+from re import fullmatch
 from django.utils.datastructures import MultiValueDict
 from django.http.request import QueryDict
 from django.http import HttpRequest
@@ -15,8 +16,9 @@ def form(request: HttpRequest):
         check_file      = lambda check, data_name: files[data_name] if not check == 'none' and file_exist(files, data_name) else None
         check_image     = lambda check, data_name: files[data_name] if check == '1' and file_exist(files, data_name) else None
 
-        academic_title = check_title(post['form4title[]'])
-        tags = post.getlist('form4profession[]')
+        academic_title  = check_title(post['form4title[]'])
+        tags            = post.getlist('form4profession[]')
+        university      = post['form4university'],
 
         title = f"{post['form4given-name']} {post['form4family-name']}"
         if academic_title:
@@ -55,7 +57,7 @@ def form(request: HttpRequest):
             current_location    = check_others(post['form4current-location[]'], 'form4current-location-other'),
             profession          = tags,
             profession_other    = (lambda professions: professions if professions else None)(post.get('form4profession-other')),
-            university          = post['form4university'],
+            university          = university,
             type_participation  = particip,
             presentation_title  = presentation_title,
             abstract            = abstract,
@@ -79,12 +81,19 @@ def form(request: HttpRequest):
 
         access = (lambda abstract, cv, check: 1 if abstract and cv and check == '1' else 0)(abstract, cv, announce)
 
-        core_id = models.ConfaprContentitemTagMap.objects.latest('core_content_id').core_content_id + 1
+        core_id = models.ConfsepContentitemTagMap.objects.latest('core_content_id').core_content_id + 1
 
-        data = models.ConfaprContent(
+        introtext = ''
+        if cv and abstract:
+            introtext = f"<p><strong>{title}</strong></p>" \
+                    f"<p>{university}</p>" \
+                    f"<p><strong>CV:</strong> {cv}</p>" \
+                    f"<p><strong>Presentation title:</strong> {presentation_title}</p>" \
+                    f"<p><strong>Abstract:</strong> {abstract}</p>"
+
+        data = models.ConfsepContent(
             title       = title,
-            introtext   = (lambda abs: abstract if abs else '""')(abstract),
-            fulltext    = (lambda cv: cv if cv else '""')(cv),
+            introtext   = introtext,
             images      = img,
             access      = access
         )
@@ -110,11 +119,11 @@ def form(request: HttpRequest):
 
         for tag in tags:
             if tag == 'other': continue
-            new_tag = models.ConfaprTags.objects.filter(title=tag)
+            new_tag = models.ConfsepTags.objects.filter(title=tag)
             if not new_tag.exists():
                 low_tag  = tag.replace(' ', '-').lower()
-                last_rgt = models.ConfaprTags.objects.latest('rgt').rgt + 1
-                new_tag  = [models.ConfaprTags(
+                last_rgt = models.ConfsepTags.objects.latest('rgt').rgt + 1
+                new_tag  = [models.ConfsepTags(
                     lft     = last_rgt,
                     rgt     = last_rgt + 1,
                     title   = tag,
@@ -122,7 +131,7 @@ def form(request: HttpRequest):
                     alias   = low_tag
                 )]
                 new_tag[0].save()
-            models.ConfaprContentitemTagMap(
+            models.ConfsepContentitemTagMap(
                 core_content_id = core_id,
                 content_item_id = data.id,
                 tag_id          = new_tag[0].id
@@ -139,10 +148,7 @@ def form(request: HttpRequest):
             'additional': alert
         })
 
-    return render(request, 'form1.html', 
-        {
-            'professions': models.ConfaprTags.objects.all()
-        })
+    return render(request, 'form1.html')
 
 def file_exist(files: MultiValueDict, key: str):
     for current_key in files.keys():
