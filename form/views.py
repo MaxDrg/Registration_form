@@ -16,10 +16,7 @@ def form(request: HttpRequest):
         check_image     = lambda check, data_name: files[data_name] if check == '1' and file_exist(files, data_name) else None
 
         academic_title = check_title(post['form4title[]'])
-
-        print(f'hi = {post.getlist("form4profession[]")}')
-        a = post.get('form4session-lead')
-        print(f'prpogw = {a}')
+        tags = post.getlist('form4profession[]')
 
         title = f"{post['form4given-name']} {post['form4family-name']}"
         if academic_title:
@@ -56,7 +53,7 @@ def form(request: HttpRequest):
             academic_status     = check_others(post['form4academic-status[]'], 'form4academic-status-other'),
             country_origin      = check_others(post['form4country-origin[]'], 'form4origin-other'),
             current_location    = check_others(post['form4current-location[]'], 'form4current-location-other'),
-            profession          = post.getlist('form4profession[]'),
+            profession          = tags,
             profession_other    = (lambda professions: professions if professions else None)(post.get('form4profession-other')),
             university          = post['form4university'],
             type_participation  = particip,
@@ -93,8 +90,6 @@ def form(request: HttpRequest):
         )
         data.save()
 
-        tags = post.getlist('form4profession[]')
-
         # for tag in post.get('form4other-profession').split('|'):
         #     if tag:
         #         new_tag = models.ConfTags.objects.filter(title=tag).exists()
@@ -114,13 +109,22 @@ def form(request: HttpRequest):
         #         tags.append(new_tag.id)
 
         for tag in tags:
-            print(tag)
-            tag = models.ConfTags.objects.filter(title=tag)[0].id
-            print(tag)
+            new_tag = models.ConfTags.objects.filter(title=tag)
+            if not new_tag.exists():
+                low_tag  = tag.replace(' ', '-').lower()
+                last_rgt = models.ConfTags.objects.latest('rgt').rgt + 1
+                new_tag  = [models.ConfTags(
+                    lft     = last_rgt,
+                    rgt     = last_rgt + 1,
+                    title   = tag,
+                    path    = low_tag,
+                    alias   = low_tag
+                )]
+                tag[0].save()
             models.ConfContentitemTagMap(
                 core_content_id = core_id,
                 content_item_id = data.id,
-                tag_id          = tag
+                tag_id          = new_tag[0].id
             ).save()
 
         alert = ''
