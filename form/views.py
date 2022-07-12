@@ -1,4 +1,3 @@
-from re import fullmatch
 from django.utils.datastructures import MultiValueDict
 from django.http.request import QueryDict
 from django.http import HttpRequest
