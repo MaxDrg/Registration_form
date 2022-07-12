@@ -1616,17 +1616,6 @@ class ConfaprJevUsers(models.Model):
         db_table = 'confapr_jev_users'
 
 
-class ConfaprJeventsCatmap(models.Model):
-    evid = models.AutoField()
-    catid = models.IntegerField()
-    ordering = models.PositiveIntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'confapr_jevents_catmap'
-        unique_together = (('evid', 'catid'),)
-
-
 class ConfaprJeventsException(models.Model):
     ex_id = models.AutoField(primary_key=True)
     rp_id = models.IntegerField()
