@@ -120,7 +120,8 @@ def form(request: HttpRequest):
                     path    = low_tag,
                     alias   = low_tag
                 )]
-                tag[0].save()
+                print(new_tag)
+                new_tag[0].save()
             models.ConfContentitemTagMap(
                 core_content_id = core_id,
                 content_item_id = data.id,
