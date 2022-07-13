@@ -19,10 +19,6 @@ def form(request: HttpRequest):
         tags            = post.getlist('form4profession[]')
         university      = post['form4university'],
 
-        title = f"{post['form4given-name']} {post['form4family-name']}"
-        if academic_title:
-            title = f"{academic_title} {post['form4given-name']} {post['form4family-name']}"
-
         particip            = post['form4participation-type']
         sess_lead           = None
         presentation_title  = None
@@ -32,6 +28,10 @@ def form(request: HttpRequest):
         image               = None
         presentation_upload = None
         social_med          = None
+
+        title = f"{post['form4given-name']} {post['form4family-name']}"
+        if academic_title:
+            title = f"{academic_title} {post['form4given-name']} {post['form4family-name']}"
         
         if particip == 'listen':
             sess_lead           = post.get('form4session-lead')
@@ -44,6 +44,7 @@ def form(request: HttpRequest):
             image               = check_image(announce, 'form4portrait-upload')
             social_med          = post.get('form4social-media')
 
+        # Adding data in the storage
         data = models.Content(
             academic_title      = academic_title,
             given_name          = post['form4given-name'],
@@ -85,11 +86,12 @@ def form(request: HttpRequest):
         introtext = ''
         if cv and abstract:
             introtext = f"<p><strong>{title}</strong></p>" \
-                    f"<p>{university}</p>" \
+                    f"<p>{university[0]}</p>" \
                     f"<p><strong>CV:</strong> {cv}</p>" \
                     f"<p><strong>Presentation title:</strong> {presentation_title}</p>" \
                     f"<p><strong>Abstract:</strong> {abstract}</p>"
 
+        # Adding data on the website
         data = models.ConfsepContent(
             title       = title,
             introtext   = introtext,
@@ -98,24 +100,7 @@ def form(request: HttpRequest):
         )
         data.save()
 
-        # for tag in post.get('form4other-profession').split('|'):
-        #     if tag:
-        #         new_tag = models.ConfTags.objects.filter(title=tag).exists()
-        #         if not new_tag:
-        #             low_tag  = tag.replace(' ', '-').lower()
-        #             last_rgt = models.ConfTags.objects.latest('rgt').rgt + 1
-        #             new_tag  = models.ConfTags(
-        #                 lft     = last_rgt,
-        #                 rgt     = last_rgt + 1,
-        #                 title   = tag,
-        #                 path    = low_tag,
-        #                 alias   = low_tag
-        #             )
-        #             new_tag.save()
-        #         else: 
-        #             new_tag = models.ConfTags.objects.filter(title=tag)[0]
-        #         tags.append(new_tag.id)
-
+        # Adding tags
         for tag in tags:
             if tag == 'other': continue
             new_tag = models.ConfsepTags.objects.filter(title=tag)
@@ -136,8 +121,8 @@ def form(request: HttpRequest):
                 tag_id          = new_tag[0].id
             ).save()
 
+        # Error message
         alert = ''
-
         if not particip == 'listen' and announce:
             if not abstract or not cv:
                 alert = 'But you need to add abstract and short CV to display you on the website.'
