@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ConfsepContent, Content
+from .models import ConfaprContent, Content
 
-admin.site.register(ConfsepContent)
+admin.site.register(ConfaprContent)
 admin.site.register(Content)

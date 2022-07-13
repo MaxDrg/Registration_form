@@ -80,7 +80,7 @@ def form(request: HttpRequest):
 
         access = (lambda abstract, cv, check: 1 if abstract and cv and check == '1' else 0)(abstract, cv, announce)
 
-        core_id = models.ConfsepContentitemTagMap.objects.latest('core_content_id').core_content_id + 1
+        core_id = models.ConfaprContentitemTagMap.objects.latest('core_content_id').core_content_id + 1
 
         introtext = ''
         if cv and abstract:
@@ -90,7 +90,7 @@ def form(request: HttpRequest):
                     f"<p><strong>Presentation title:</strong> {presentation_title}</p>" \
                     f"<p><strong>Abstract:</strong> {abstract}</p>"
 
-        data = models.ConfsepContent(
+        data = models.ConfaprContent(
             title       = title,
             introtext   = introtext,
             images      = img,
@@ -118,11 +118,11 @@ def form(request: HttpRequest):
 
         for tag in tags:
             if tag == 'other': continue
-            new_tag = models.ConfsepTags.objects.filter(title=tag)
+            new_tag = models.ConfaprTags.objects.filter(title=tag)
             if not new_tag.exists():
                 low_tag  = tag.replace(' ', '-').lower()
-                last_rgt = models.ConfsepTags.objects.latest('rgt').rgt + 1
-                new_tag  = [models.ConfsepTags(
+                last_rgt = models.ConfaprTags.objects.latest('rgt').rgt + 1
+                new_tag  = [models.ConfaprTags(
                     lft     = last_rgt,
                     rgt     = last_rgt + 1,
                     title   = tag,
@@ -130,7 +130,7 @@ def form(request: HttpRequest):
                     alias   = low_tag
                 )]
                 new_tag[0].save()
-            models.ConfsepContentitemTagMap(
+            models.ConfaprContentitemTagMap(
                 core_content_id = core_id,
                 content_item_id = data.id,
                 tag_id          = new_tag[0].id
