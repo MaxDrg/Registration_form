@@ -8,10 +8,9 @@ class PersonAdminForm(forms.ModelForm):
         fields = "__all__"
 
     def clean_title(self):
-        if self.cleaned_data["title"] == "Spike":
-            self.cleaned_data["title"] == "Tester"
+        data = self.cleaned_data["title"]
 
-        return self.cleaned_data["title"]
+        return 'tester'
 
 
 @admin.register(ConfsepContent)
