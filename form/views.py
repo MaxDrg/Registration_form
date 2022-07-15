@@ -177,7 +177,6 @@ def registr_message(title: str, access: int, cv, abstract):
         elif cv:
             option = 'Abstract'
         notification = f"""
-        
             You did not input your {option} while registration. If you want us to update your Online 
             profile, please send us these information to conference@chance-for-science.de
 
