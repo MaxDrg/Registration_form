@@ -9,7 +9,7 @@ class PersonAdminForm(forms.ModelForm):
 
     def clean_title(self):
         if self.cleaned_data["title"] == "Spike":
-            raise forms.ValidationError("No Vampires")
+            self.cleaned_data["title"] == "Tester"
 
         return self.cleaned_data["title"]
 
