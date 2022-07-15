@@ -373,7 +373,7 @@ class ConfsepContent(models.Model):
     hits = models.PositiveIntegerField(default='0', editable=False)
     metadata = models.TextField(default='{"robots":"","author":"","rights":"","xreference":""}', editable=False)
     featured = models.PositiveIntegerField(default=0, editable=False)
-    language = models.CharField(max_length=7, default='*')
+    language = models.CharField(max_length=7, default='*', editable=False)
     xreference = models.CharField(max_length=50, editable=False)
     note = models.CharField(max_length=255, editable=False)
 
