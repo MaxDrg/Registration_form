@@ -7,10 +7,11 @@ class PersonAdminForm(forms.ModelForm):
         model = ConfsepContent
         fields = "__all__"
 
-    def clean_title(self):
-        data = self.cleaned_data["title"]
+    def clean_checked_out_time(self):
+        return '0000-00-00 00:00:00'
 
-        return 'tester'
+    def clean_publish_down(self):
+        return '0000-00-00 00:00:00'
 
 
 @admin.register(ConfsepContent)
