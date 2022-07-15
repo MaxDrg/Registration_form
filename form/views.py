@@ -207,7 +207,7 @@ def email_notification(part_type: str, title: str, email: str, phone: str,
         --Automatische Mail--
 
         Form Data:
-        Registered at {datetime.strftime(datetime.now(), '%y-%m-%d %H:%M:%S')}
+        Registered at {datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')}
         Academic Title : {title}
         Gender : {gender}
         Email : {email}
