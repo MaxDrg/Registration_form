@@ -89,7 +89,7 @@ def form(request: HttpRequest):
         core_id = models.ConfsepContentitemTagMap.objects.latest('core_content_id').core_content_id + 1
 
         introtext = f"<p><strong>{title}</strong></p>" \
-            f"<p>{university[0]}</p>" \
+            f"<p>{university}</p>" \
             f"<p><strong>CV:</strong> {cv}</p>" \
             f"<p><strong>Presentation title:</strong> {presentation_title}</p>" \
             f"<p><strong>Abstract:</strong> {abstract}</p>"
