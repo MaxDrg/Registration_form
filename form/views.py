@@ -181,7 +181,6 @@ def registr_message(title: str, access: int, cv, abstract):
             profile, please send us these information to conference@chance-for-science.de
 
             You will receive further information on how to join the online conference later.
-
         """
 
     message = f"""
