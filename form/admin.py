@@ -8,9 +8,13 @@ class PersonAdminForm(forms.ModelForm):
         fields = "__all__"
 
     def clean_checked_out_time(self):
+        if self.cleaned_data["title"] == "":
+            return '0000-00-00 00:00:00'
         return '0000-00-00 00:00:00'
 
     def clean_publish_down(self):
+        if self.cleaned_data["title"] == "":
+            return '0000-00-00 00:00:00'
         return '0000-00-00 00:00:00'
 
 
