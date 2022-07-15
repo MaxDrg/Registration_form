@@ -2,6 +2,7 @@ from django.utils.datastructures import MultiValueDict
 from django.http.request import QueryDict
 from django.http import HttpRequest
 from django.shortcuts import render
+from datetime import datetime
 from . import models, emails
 
 def form(request: HttpRequest):
@@ -21,6 +22,7 @@ def form(request: HttpRequest):
         email           = post['form4email']
         family_name     = post['form4family-name']
         phone           = post['form4telephone']
+        gender          = post['form4gender[]']
 
         particip            = post['form4participation-type']
         sess_lead           = None
@@ -52,7 +54,7 @@ def form(request: HttpRequest):
             academic_title      = academic_title,
             given_name          = post['form4given-name'],
             family_name         = family_name,
-            gender              = post['form4gender[]'],
+            gender              = gender,
             email               = email,
             telephone           = phone,
             academic_status     = check_others(post['form4academic-status[]'], 'form4academic-status-other'),
@@ -128,8 +130,14 @@ def form(request: HttpRequest):
 
         # Sending emails
         email_sender = emails.Email(email)
-        email_sender.send_email(registr_message(title, access, cv, abstract))
-        email_sender.send_email(email_notification(
+        email_sender.send_email(
+            subject='Registration for the Conference', 
+            body=registr_message(title, access, cv, abstract),
+            receiver=email
+        )
+        email_sender.send_email(
+            subject='Neue Anmeldung CfS Conference', 
+            body=email_notification(
             part_type   = particip, 
             title       = title,
             email       = email, 
@@ -137,7 +145,8 @@ def form(request: HttpRequest):
             university  = university, 
             presen      = presentation_title, 
             cv          = cv,
-            abstract    = abstract
+            abstract    = abstract,
+            gender      = gender
         ))
 
         # Error message
@@ -170,6 +179,7 @@ def registr_message(title: str, access: int, cv, abstract):
         elif cv:
             option = 'Abstract'
         notification = f"""
+        
             You did not input your {option} while registration. If you want us to update your Online 
             profile, please send us these information to conference@chance-for-science.de
 
@@ -181,7 +191,6 @@ def registr_message(title: str, access: int, cv, abstract):
         Dear {title}
 
         Thank you for your registration for the Chance for Science Conference 2022 on September, 8-9 2022.
-
         {notification}
         Please do not hesitate to contact us for any questions (just reply to this mail).
 
@@ -192,19 +201,22 @@ def registr_message(title: str, access: int, cv, abstract):
     return message
 
 def email_notification(part_type: str, title: str, email: str, phone: str, 
-                    university: str, presen: str, cv: str, abstract: str):
+                    university: str, presen: str, cv: str, abstract: str,
+                    gender: str):
     message = f"""
         New registration:
 
         Participation-Type: {part_type}
 
         Form Data:
-
-        Name: {title}
-        Email: {email}
-        Phone: {phone}
-        University: {university}
-        Presentation title: {presen}
+        Registered at {datetime.strftime(datetime.now(), '%y-%m-%d %H:%M:%S')}
+        Academic Title : {title}
+        Gender : {gender}
+        Email : {email}
+        Telephone : {phone}
+        University : {university}
+        Type of Participation : {part_type}
+        Presentation Title : {presen}
 
         CV: {cv}
 
