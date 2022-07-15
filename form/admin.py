@@ -11,7 +11,7 @@ class PersonAdminForm(forms.ModelForm):
         if self.cleaned_data["title"] == "Spike":
             raise forms.ValidationError("No Vampires")
 
-        return self.cleaned_data["first_name"]
+        return self.cleaned_data["title"]
 
 
 @admin.register(ConfsepContent)
