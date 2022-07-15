@@ -5,6 +5,7 @@
 #   * Make sure each ForeignKey has `on_delete` set to the desired behavior.
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
+from datetime import datetime
 from django.db import models
 from django.utils import timezone
 
@@ -359,9 +360,9 @@ class ConfsepContent(models.Model):
     modified = models.DateTimeField(default=timezone.now, editable=False)
     modified_by = models.PositiveIntegerField(default=0, editable=False)
     checked_out = models.PositiveIntegerField(default=0, editable=False)
-    checked_out_time = models.CharField(max_length=255, default='{}')
+    checked_out_time = models.DateTimeField(max_length=255, default=datetime.strptime('0000-00-00 00:00:00', '%y-%m-%d %H:%M:%S'))
     publish_up = models.DateTimeField(default=timezone.now)
-    publish_down = models.CharField(max_length=255, default='0000-00-00 00:00:00', editable=False)
+    publish_down = models.DateTimeField(max_length=255, default=datetime.strptime('0000-00-00 00:00:00', '%y-%m-%d %H:%M:%S'))
     images = models.TextField()
     urls = models.TextField(default='{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', editable=False)
     attribs = models.CharField(max_length=5120, default='{"article_layout":"","show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","info_block_show_title":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_associations":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_page_title":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', editable=False)
