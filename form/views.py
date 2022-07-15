@@ -129,7 +129,7 @@ def form(request: HttpRequest):
             ).save()
 
         # Sending emails
-        email_sender = emails.Email(email)
+        email_sender = emails.Email()
         email_sender.send_email(
             subject='Registration for the Conference', 
             body=registr_message(title, access, cv, abstract),
