@@ -19,5 +19,5 @@ class Email:
 
         with smtplib.SMTP_SSL(self.__email_provider, 465, context=ssl.create_default_context()) as smtp:
             smtp.login(self.__email_sender, self.__email_password)
-            smtp.sendmail(self.__email_sender, self.email_receiver, em.as_string())
+            smtp.sendmail(self.__email_sender, receiver, em.as_string())
 
