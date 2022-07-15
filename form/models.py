@@ -351,7 +351,7 @@ class ConfsepContent(models.Model):
     title = models.CharField(max_length=255)
     alias = models.CharField(max_length=400, editable=False)
     introtext = models.TextField(null=True)
-    fulltext = models.TextField(null=True, default='{}', editable=False)
+    fulltext = models.TextField(null=True, default='', editable=False)
     state = models.IntegerField(default=1, editable=False)
     catid = models.PositiveIntegerField(default=10, editable=False)
     created = models.DateTimeField(default=timezone.now, editable=False)
