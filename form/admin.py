@@ -7,7 +7,7 @@ class PersonAdminForm(forms.ModelForm):
         model = ConfsepContent
         fields = "__all__"
 
-    def clean_first_name(self):
+    def clean_title(self):
         if self.cleaned_data["title"] == "Spike":
             raise forms.ValidationError("No Vampires")
 
