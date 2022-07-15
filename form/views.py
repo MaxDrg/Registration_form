@@ -2,7 +2,7 @@ from django.utils.datastructures import MultiValueDict
 from django.http.request import QueryDict
 from django.http import HttpRequest
 from django.shortcuts import render
-from . import models
+from . import models, emails
 
 def form(request: HttpRequest):
     if request.method == "POST":
@@ -17,7 +17,10 @@ def form(request: HttpRequest):
 
         academic_title  = check_title(post['form4title[]'])
         tags            = post.getlist('form4profession[]')
-        university      = post['form4university'],
+        university      = post['form4university']
+        email           = post['form4email']
+        family_name     = post['form4family-name']
+        phone           = post['form4telephone']
 
         particip            = post['form4participation-type']
         sess_lead           = None
@@ -48,10 +51,10 @@ def form(request: HttpRequest):
         data = models.Content(
             academic_title      = academic_title,
             given_name          = post['form4given-name'],
-            family_name         = post['form4family-name'],
+            family_name         = family_name,
             gender              = post['form4gender[]'],
-            email               = post['form4email'],
-            telephone           = post['form4telephone'],
+            email               = email,
+            telephone           = phone,
             academic_status     = check_others(post['form4academic-status[]'], 'form4academic-status-other'),
             country_origin      = check_others(post['form4country-origin[]'], 'form4origin-other'),
             current_location    = check_others(post['form4current-location[]'], 'form4current-location-other'),
@@ -69,7 +72,7 @@ def form(request: HttpRequest):
         )
         data.save()
 
-        img = '{"image_intro":"images\/Profil.png","float_intro":"","image_intro_alt":"' + title \
+        img: str = '{"image_intro":"images\/Profil.png","float_intro":"","image_intro_alt":"' + title \
                 + '","image_intro_caption":"","image_fulltext":"images\/Profil.png","float_fulltext":"","image_fulltext_alt":"' \
                 + title + '","image_fulltext_caption":""}'
 
@@ -79,7 +82,7 @@ def form(request: HttpRequest):
                 + '","image_intro_caption":"","image_fulltext":"' + url + '","float_fulltext":"","image_fulltext_alt":"' \
                 + title + '","image_fulltext_caption":""}'
 
-        access = (lambda abstract, cv, check: 1 if abstract and cv and check == '1' else 0)(abstract, cv, announce)
+        access: int = (lambda abstract, cv, check: 1 if abstract and cv and check == '1' else 0)(abstract, cv, announce)
 
         core_id = models.ConfsepContentitemTagMap.objects.latest('core_content_id').core_content_id + 1
 
@@ -94,6 +97,7 @@ def form(request: HttpRequest):
         # Adding data on the website
         data = models.ConfsepContent(
             title       = title,
+            alias       = family_name.lower(),
             introtext   = introtext,
             images      = img,
             access      = access
@@ -107,6 +111,7 @@ def form(request: HttpRequest):
             if not new_tag.exists():
                 low_tag  = tag.replace(' ', '-').lower()
                 last_rgt = models.ConfsepTags.objects.latest('rgt').rgt + 1
+
                 new_tag  = [models.ConfsepTags(
                     lft     = last_rgt,
                     rgt     = last_rgt + 1,
@@ -120,6 +125,20 @@ def form(request: HttpRequest):
                 content_item_id = data.id,
                 tag_id          = new_tag[0].id
             ).save()
+
+        # Sending emails
+        email_sender = emails.Email(email)
+        email_sender.send_email(registr_message(title, access, cv, abstract))
+        email_sender.send_email(email_notification(
+            part_type   = particip, 
+            title       = title,
+            email       = email, 
+            phone       = phone, 
+            university  = university, 
+            presen      = presentation_title, 
+            cv          = cv,
+            abstract    = abstract
+        ))
 
         # Error message
         alert = ''
@@ -139,3 +158,59 @@ def file_exist(files: MultiValueDict, key: str):
         if current_key == key:
             return True
     return False
+
+def registr_message(title: str, access: int, cv, abstract):
+    
+    notification = ''
+    
+    if access == '0':
+        option = 'CV and Abstract'
+        if abstract:
+            option = 'CV'
+        elif cv:
+            option = 'Abstract'
+        notification = f"""
+            You did not input your {option} while registration. If you want us to update your Online 
+            profile, please send us these information to conference@chance-for-science.de
+
+            You will receive further information on how to join the online conference later.
+
+        """
+
+    message = f"""
+        Dear {title}
+
+        Thank you for your registration for the Chance for Science Conference 2022 on September, 8-9 2022.
+
+        {notification}
+        Please do not hesitate to contact us for any questions (just reply to this mail).
+
+        Sincerely,
+
+        The Chance for Science Team
+    """
+    return message
+
+def email_notification(part_type: str, title: str, email: str, phone: str, 
+                    university: str, presen: str, cv: str, abstract: str):
+    message = f"""
+        New registration:
+
+        Participation-Type: {part_type}
+
+        Form Data:
+
+        Name: {title}
+        Email: {email}
+        Phone: {phone}
+        University: {university}
+        Presentation title: {presen}
+
+        CV: {cv}
+
+        Abstract: {abstract}
+
+        --Automatische Mail--
+    """
+
+    return message
