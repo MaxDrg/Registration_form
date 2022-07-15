@@ -88,13 +88,11 @@ def form(request: HttpRequest):
 
         core_id = models.ConfsepContentitemTagMap.objects.latest('core_content_id').core_content_id + 1
 
-        introtext = ''
-        if cv and abstract:
-            introtext = f"<p><strong>{title}</strong></p>" \
-                    f"<p>{university[0]}</p>" \
-                    f"<p><strong>CV:</strong> {cv}</p>" \
-                    f"<p><strong>Presentation title:</strong> {presentation_title}</p>" \
-                    f"<p><strong>Abstract:</strong> {abstract}</p>"
+        introtext = f"<p><strong>{title}</strong></p>" \
+            f"<p>{university[0]}</p>" \
+            f"<p><strong>CV:</strong> {cv}</p>" \
+            f"<p><strong>Presentation title:</strong> {presentation_title}</p>" \
+            f"<p><strong>Abstract:</strong> {abstract}</p>"
 
         # Adding data on the website
         data = models.ConfsepContent(
@@ -172,7 +170,7 @@ def registr_message(title: str, access: int, cv, abstract):
     
     notification = ''
     
-    if access == '0':
+    if access == 0:
         option = 'CV and Abstract'
         if abstract:
             option = 'CV'
@@ -208,6 +206,8 @@ def email_notification(part_type: str, title: str, email: str, phone: str,
 
         Participation-Type: {part_type}
 
+        --Automatische Mail--
+
         Form Data:
         Registered at {datetime.strftime(datetime.now(), '%y-%m-%d %H:%M:%S')}
         Academic Title : {title}
@@ -221,8 +221,6 @@ def email_notification(part_type: str, title: str, email: str, phone: str,
         CV: {cv}
 
         Abstract: {abstract}
-
-        --Automatische Mail--
     """
 
     return message
