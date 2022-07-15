@@ -359,7 +359,7 @@ class ConfsepContent(models.Model):
     modified = models.DateTimeField(default=timezone.now, editable=False)
     modified_by = models.PositiveIntegerField(default=0, editable=False)
     checked_out = models.PositiveIntegerField(default=0, editable=False)
-    checked_out_time = models.CharField(max_length=255, default='0000-00-00 00:00:00', editable=False)
+    checked_out_time = models.CharField(max_length=255, default='{}')
     publish_up = models.DateTimeField(default=timezone.now)
     publish_down = models.CharField(max_length=255, default='0000-00-00 00:00:00', editable=False)
     images = models.TextField()
