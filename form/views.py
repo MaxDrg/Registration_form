@@ -10,29 +10,22 @@ def form(request: HttpRequest):
         post: QueryDict = request.POST
         files: MultiValueDict = request.FILES
 
-        check_title     = lambda title: title if not title == 'Choose a value' else ''
         check_others    = lambda current, other: post[other] if current == 'other' else current
         check_checkbox  = lambda check, file: post[file] if not check == 'none' else None
+        
         check_file      = lambda check, data_name: files[data_name] if not check == 'none' and file_exist(files, data_name) else None
         check_image     = lambda check, data_name: files[data_name] if check == '1' and file_exist(files, data_name) else None
 
-        academic_title  = check_title(post['form4title[]'])
+        academic_title  = (lambda title: title if not title == 'Choose a value' else '')(post['form4title[]'])
         tags            = post.getlist('form4profession[]')
         university      = post['form4university']
         email           = post['form4email']
         family_name     = post['form4family-name']
         phone           = post['form4telephone']
         gender          = post['form4gender[]']
+        particip        = post['form4participation-type']
 
-        particip            = post['form4participation-type']
-        sess_lead           = None
-        presentation_title  = None
-        announce            = None
-        abstract            = None
-        cv                  = None
-        image               = None
-        presentation_upload = None
-        social_med          = None
+        sess_lead, presentation_title, announce, abstract, cv, image, presentation_upload, social_med = None
 
         title = f"{post['form4given-name']} {post['form4family-name']}"
         if academic_title:
