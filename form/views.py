@@ -123,7 +123,7 @@ def form(request: HttpRequest):
         email_sender = emails.Email()
         email_sender.send_email(
             subject='Registration for the Conference', 
-            body=registr_message(title, access, cv, abstract),
+            body=registr_message(title, particip, access, cv, abstract),
             receiver=email
         )
         email_sender.send_email(
@@ -159,11 +159,11 @@ def file_exist(files: MultiValueDict, key: str):
             return True
     return False
 
-def registr_message(title: str, access: int, cv, abstract):
+def registr_message(title: str, particip: str, access: int, cv, abstract):
     
     notification = ''
     
-    if access == 0:
+    if access == 0 and particip == 'presentation':
         option = 'CV and Abstract'
         if abstract:
             option = 'CV'
