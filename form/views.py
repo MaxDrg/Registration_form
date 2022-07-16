@@ -62,8 +62,8 @@ def form(request: HttpRequest):
             short_cv            = cv,
             presentation_upload = presentation_upload,
             portrait            = image,
-            session_lead        = sess_lead,
-            social_media        = social_med,
+            session_lead        = bool(sess_lead),
+            social_media        = bool(social_med),
         )
         data.save()
 
