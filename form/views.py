@@ -12,7 +12,7 @@ def form(request: HttpRequest):
 
         check_others    = lambda current, other: post[other] if current == 'other' else current
         check_checkbox  = lambda check, file: post[file] if not check == 'none' else None
-        
+
         check_file      = lambda check, data_name: files[data_name] if not check == 'none' and file_exist(files, data_name) else None
         check_image     = lambda check, data_name: files[data_name] if check == '1' and file_exist(files, data_name) else None
 
@@ -25,7 +25,7 @@ def form(request: HttpRequest):
         gender          = post['form4gender[]']
         particip        = post['form4participation-type']
 
-        sess_lead, presentation_title, announce, abstract, cv, image, presentation_upload, social_med = None
+        sess_lead = presentation_title = announce = abstract = cv = image = presentation_upload = social_med = None
 
         title = f"{post['form4given-name']} {post['form4family-name']}"
         if academic_title:
