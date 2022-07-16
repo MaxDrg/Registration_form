@@ -6244,8 +6244,8 @@ class Content(models.Model):
     presentation_upload = models.FileField(max_length=100, blank=True, null=True)
     portrait = models.FileField(max_length=100, blank=True, null=True)
     profession_other = models.CharField(max_length=500, blank=True, null=True)
-    session_lead = models.BooleanField(blank=True, null=True)
-    social_media = models.BooleanField(blank=True, null=True)
+    session_lead = models.BooleanField(blank=True)
+    social_media = models.BooleanField(blank=True)
 
     class Meta:
         managed = False
