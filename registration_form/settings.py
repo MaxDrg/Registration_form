@@ -28,8 +28,6 @@ DEBUG = bool(os.environ.get('DEBUG'))
 
 ALLOWED_HOSTS = list(os.environ.get('ALLOWED_HOSTS'))
 
-FILE_UPLOAD_PERMISSIONS=0o640
-
 # Application definition
 
 INSTALLED_APPS = [
