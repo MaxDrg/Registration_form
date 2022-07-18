@@ -28,7 +28,7 @@ DEBUG = bool(os.environ.get('DEBUG'))
 
 ALLOWED_HOSTS = list(os.environ.get('ALLOWED_HOSTS'))
 
-FILE_UPLOAD_PERMISSIONS=20000000000
+FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880
 
 # Application definition
 
