@@ -28,6 +28,8 @@ DEBUG = bool(os.environ.get('DEBUG'))
 
 ALLOWED_HOSTS = list(os.environ.get('ALLOWED_HOSTS'))
 
+FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -76,12 +78,12 @@ WSGI_APPLICATION = 'registration_form.wsgi.application'
 
 DATABASES = {  
     'default': {  
-        'ENGINE': os.environ.get('ENGINE'),  
-        'NAME': os.environ.get('NAME'),  
-        'USER': os.environ.get('USER'),  
-        'PASSWORD': os.environ.get('PASS'),  
-        'HOST': os.environ.get('HOST'), 
-         'PORT': os.environ.get('PORT'), 
+        'ENGINE': os.environ.get('ENGINE'),
+        'NAME': os.environ.get('NAME'),
+        'USER': os.environ.get('USER'),
+        'PASSWORD': os.environ.get('PASS'),
+        'HOST': os.environ.get('HOST'),
+         'PORT': os.environ.get('PORT'),
         'OPTIONS': {  
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
         }  
@@ -146,3 +148,7 @@ MEDIA_ROOT = '/mediafiles/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_SENDER = os.environ.get('EMAIL_SENDER')
+EMAIL_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+EMAIL_PROVIDER = os.environ.get('EMAIL_PROVIDER')
