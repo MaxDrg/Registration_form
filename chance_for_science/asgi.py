@@ -1,5 +1,5 @@
 """
-ASGI config for registration_form project.
+ASGI config for chance_for_science project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'registration_form.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'chance_for_science.settings')
 
 application = get_asgi_application()

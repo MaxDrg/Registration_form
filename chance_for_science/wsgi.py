@@ -1,5 +1,5 @@
 """
-WSGI config for registration_form project.
+WSGI config for chance_for_science project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'registration_form.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'chance_for_science.settings')
 
 application = get_wsgi_application()
