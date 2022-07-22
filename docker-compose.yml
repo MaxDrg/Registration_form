@@ -2,11 +2,11 @@ version: "3.0"
  
 services:
   web:
-    image: registration_form:1.0.1
+    image: chance_for_science:1.0.1
     build: .
-    command: gunicorn registration_form.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn chance_for_science.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - .:/registration_form
+      - .:/chance_for_science
       - static:/staticfiles/
       - media:/mediafiles/
     expose:

@@ -1,6 +1,6 @@
 FROM python:3.8.10
 # set work directory
-WORKDIR /registration_form
+WORKDIR /chance_for_science
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -15,4 +15,4 @@ COPY ./entrypoint.sh .
 # copy project
 COPY . .
 # run entrypoint.sh
-ENTRYPOINT ["/registration_form/entrypoint.sh"]
+ENTRYPOINT ["/chance_for_science/entrypoint.sh"]
