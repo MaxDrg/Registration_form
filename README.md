@@ -6,6 +6,8 @@
 When developing the [Chance for science](https://chance-for-science.eu) website by the Joomla service, there was a problem that some of the site's functionality did not work or did not work correctly.
 
 <p>This web service represents all the functionality of the site that could not be developed using Joomla.</p>
+
+<p>Lower there are all apps which realize in this site.</p>
 </div>
 
 <div>
