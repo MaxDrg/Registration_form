@@ -9,7 +9,7 @@ When developing the [Chance for science](https://chance-for-science.eu) website 
 </div>
 
 <div>
-<h3>:memo::pencil: Registration form</h3>
+<h3>:memo: Registration form</h3>
 
 <p>The registration form simplifies all processes and makes them more automated. This decrease a role of administrator in interacting with website's users. There is a description of all functionality:</p>
 <ul>
