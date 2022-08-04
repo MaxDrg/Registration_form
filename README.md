@@ -11,7 +11,8 @@ When developing the [Chance for science](https://chance-for-science.eu) website 
 <div>
 <h3>:memo: Registration form</h3>
 
-<p>The registration form simplifies all processes and makes them more automated. This decrease a role of administrator in interacting with website's users. There is a description of all functionality:</p>
+The [registration form](https://registration.chance-for-science.eu) simplifies all processes and makes them more automated. This decrease a role of administrator in interacting with website's users. There is a description of all functionality:
+
 <ul>
 <li>The gathering of information about users who want to be added to the conference.</li>
 <li>The ability to add a user to the main page of the site, at the request of the user.</li>
